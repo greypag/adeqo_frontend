@@ -1,0 +1,1427 @@
+<%= render partial: "campaign_tab_menu.html.erb" %>
+
+<%
+ @username 
+ @password
+ @api_token
+%>
+
+
+<div class="content_outer">
+	<div class="content_core">
+		<div class="content_form">
+			<form action="" method="post" id="adgroupSettingForm" autocomplete="off">
+				
+				<input id="setting_campaign_id" name="" type="hidden" value="<%=@id.to_s%>" class="form_field"/>
+				<input id="setting_network_id" name="" type="hidden" value="<%=@network_id.to_s%>" class="form_field"/>
+				
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_campaign_name" class="form_label pull-right">Campaign Name:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<input id="adgroup_setting_campaign_name" name="" type="text" value="<%=@title.to_s%>" autocomplete="off" class="form_field"/><br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Network:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<div class="form_field fixed_field"><%=@type.to_s.capitalize%></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="setting_status" class="form_label pull-right">Status:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="setting_status" name="" class="form_field">
+							<% if @status.to_s.downcase == "inactive" %>
+									<option value="inactive">Inactive</option>
+									<option value="active">Active</option>
+							<% else %>
+									<option value="active">Active</option>
+									<option value="inactive">Inactive</option>
+							<% end %>
+						</select>
+						<br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="setting_start_date" class="form_label pull-right">Start Date:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left datepicker-container">
+						<input id="setting_start_date" name="" type="text" class="datepicker-field form_field">
+						<span class="caret input-caret"></span>
+						<br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="setting_end_date" class="form_label pull-right">End Date:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left datepicker-container">
+						<input id="setting_end_date" name="" type="text" class="datepicker-field form_field">
+						<span class="caret input-caret"></span>
+						<br/>
+						<span id="setting_end_date_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="setting_geo_targeting" class="form_label pull-right">Geo Targeting:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="setting_geo_targeting" name="" class="form_field">
+							
+							<% if @type.to_s == "sogou" %>
+								<option value="0001">All</option>
+								<option value="35000">None</option>
+								<option value="1000">Beijing</option>
+								<option value="2000">Shanghai</option>
+								<option value="3000">Tianjin</option>
+								<option value="4000">Guangdong</option>
+								<option value="5000">Fujian</option>
+								<option value="8000">Hainan</option>
+								<option value="9000">Anhui</option>
+								<option value="10000">Guizhou</option>
+								<option value="11000">Gansu</option>
+								<option value="12000">Guangxi</option>
+								<option value="13000">Hebei</option>
+								<option value="14000">Henan</option>
+								<option value="15000">Heilongjiang</option>
+								<option value="16000">Hubei</option>
+								<option value="17000">Hunan</option>
+								<option value="18000">Jilin</option>
+								<option value="19000">Jiangsu</option>
+								<option value="20000">Jiangxi</option>
+								<option value="21000">Liaoning</option>
+								<option value="22000">Inner Mongolia</option>
+								<option value="23000">Ningxia</option>
+								<option value="24000">Qinghai</option>
+								<option value="25000">Shandong</option>
+								<option value="26000">Shanxi</option>
+								<option value="27000">Shaanxi</option>
+								<option value="28000">Sichuan</option>
+								<option value="29000">Tibet</option>
+								<option value="30000">Xinjiang</option>
+								<option value="31000">Yunnan</option>
+								<option value="32000">Zhejiang</option>
+								<option value="33000">Chongqing</option>
+								<option value="34000">HK/Macau/Others</option>
+								
+								
+							<% elsif @type.to_s == "threesixty" %>
+							
+								<option value="0">All</option>
+								<option value="">None</option>
+								<option value="1">Beijing</option>
+								<option value="2">Shanghai</option>
+								<option value="3">Tianjin</option>
+								<option value="4">Chongqing</option>
+								<option value="5">Hebei</option>
+								<option value="6">Shanxi</option>
+								<option value="7">Inner Mongolia</option>
+								<option value="8">Liaoning</option>
+								<option value="9">Jilin</option>
+								<option value="10">Heilongjiang</option>
+								<option value="11">Jiangsu</option>
+								<option value="12">Zhejiang</option>
+								<option value="13">Anhui</option>
+								<option value="14">Fujian</option>
+								<option value="15">Jiangxi</option>
+								<option value="16">Shandong</option>
+								<option value="17">Henan</option>
+								<option value="18">Hubei</option>
+								<option value="19">Hunan</option>
+								<option value="20">Guangdong</option>
+								<option value="21">Guangxi</option>
+								<option value="22">Hainan</option>
+								<option value="23">Sichuan</option>
+								<option value="24">Guizhou</option>
+								<option value="25">Yunnan</option>
+								<option value="26">Tibet</option>
+								<option value="27">Shaanxi</option>
+								<option value="28">Gansu</option>
+								<option value="29">Ningxia</option>
+								<option value="30">Qinghai</option>
+								<option value="31">Xinjiang</option>
+								<option value="32">HK</option>
+								<option value="33">Macau</option>
+								
+								<option value="34">Taiwan</option>
+								<option value="35">Shijiazhuang</option>
+								<option value="36">Handan</option>
+								<option value="37">Xingtai</option>
+								<option value="38">Baoding</option>
+								<option value="39">Zhangjiakou</option>
+								<option value="40">Chengde</option>
+								<option value="41">Langfang</option>
+								<option value="42">Tangshan</option>
+								<option value="43">Qinhuangdao</option>
+								<option value="44">Cangzhou</option>
+								<option value="45">Taiyuan</option>
+								<option value="46">Datong</option>
+								<option value="47">Yangquan</option>
+								<option value="48">Changzhi</option>
+								<option value="49">Jincheng</option>
+								<option value="50">Shuozhou</option>
+								<option value="51">Lüliang</option>
+								<option value="52">Xinzhou</option>
+								<option value="53">Jinzhong</option>
+								<option value="54">Linfen</option>
+								<option value="55">Hohhot</option>
+								<option value="56">Baotou</option>
+								<option value="57">Wuhai</option>
+								<option value="58">Chifeng</option>
+								<option value="59">Hulunbuir</option>
+								<option value="60">Alxa League</option>
+								<option value="62">Xing'an County</option>
+								<option value="63">Ulanqab</option>
+								
+								<option value="64">Xilingol League</option>
+								<option value="65">Bayannur</option>
+								<option value="66">Shenyang</option>
+								<option value="67">Dalian</option>
+								<option value="68">Anshan</option>
+								<option value="69">Fushun</option>
+								<option value="70">Benxi</option>
+								<option value="71">Dandong</option>
+								<option value="72">Jinzhou</option>
+								<option value="73">Yingkou</option>
+								<option value="74">Fuxin</option>
+								<option value="75">Liaoyang</option>
+								<option value="76">Panjin</option>
+								<option value="77">Tieling</option>
+								<option value="78">Chaoyang</option>
+								<option value="79">Changchun</option>
+								<option value="80">Jilin</option>
+								<option value="81">Siping</option>
+								<option value="82">Liaoyuan</option>
+								<option value="83">Tonghua</option>
+								<option value="84">Baishan</option>
+								<option value="85">Songyuan</option>
+								<option value="86">Baicheng</option>
+								<option value="87">Harbin</option>
+								<option value="88">Qiqihar</option>
+								<option value="89">Mudanjiang</option>
+								<option value="90">Jiamusi</option>
+								<option value="91">Daqing</option>
+								<option value="92">Suihua</option>
+								<option value="93">Hegang</option>
+								
+								<option value="94">Jixi</option>
+								<option value="95">Heihe</option>
+								<option value="96">Shuangyashan</option>
+								<option value="97">Yichun</option>
+								<option value="98">Qitaihe</option>
+								<option value="99">Nanjing</option>
+								<option value="100">Zhenjiang</option>
+								<option value="101">Suzhou</option>
+								<option value="102">Nantong</option>
+								<option value="103">Yangzhou</option>
+								<option value="104">Yancheng</option>
+								<option value="105">Xuzhou</option>
+								<option value="106">Lianyungang</option>
+								<option value="107">Changzhou</option>
+								<option value="108">Wuxi</option>
+								<option value="109">Suqian</option>
+								<option value="110">Taizhou</option>
+								<option value="111">Hangzhou</option>
+								<option value="112">Ningbo</option>
+								<option value="113">Wenzhou</option>
+								<option value="114">Jiaxing</option>
+								<option value="115">Huzhou</option>
+								<option value="116">Shaoxing</option>
+								<option value="117">Jinhua</option>
+								<option value="118">Quzhou</option>
+								<option value="119">Zhoushan</option>
+								<option value="120">Taizhou</option>
+								<option value="121">Hefei</option>
+								<option value="122">Wuhu</option>
+								<option value="123">Bengbu</option>
+								
+								<option value="124">Ma'anshan</option>
+								<option value="125">Huaibei</option>
+								<option value="126">Tongling</option>
+								<option value="127">Anqing</option>
+								<option value="128">Huangshan</option>
+								<option value="129">Chuzhou</option>
+								<option value="130">Suzhou</option>
+								<option value="131">Chizhou</option>
+								<option value="132">Huainan</option>
+								<option value="133">Chaohu</option>
+								<option value="134">Fuyang</option>
+								<option value="135">Lu'an</option>
+								<option value="136">Xuancheng</option>
+								<option value="137">Fuzhou</option>
+								<option value="138">Xiamen</option>
+								<option value="139">Putian</option>
+								<option value="140">Sanming</option>
+								<option value="141">Quanzhou</option>
+								<option value="142">Zhangzhou</option>
+								<option value="143">Nanping</option>
+								<option value="144">Longyan</option>
+								<option value="145">Nanchang</option>
+								<option value="146">Jingdezhen</option>
+								<option value="147">Jiujiang</option>
+								<option value="148">Yingtan</option>
+								<option value="149">Pingxiang</option>
+								<option value="150">新馀</option>
+								<option value="151">Ganzhou</option>
+								<option value="152">Ji'an</option>
+								<option value="153">Yichun</option>
+								
+								<option value="154">Fuzhou</option>
+								<option value="155">Jinan</option>
+								<option value="156">Qingdao</option>
+								<option value="157">Zibo</option>
+								<option value="158">Zaozhuang</option>
+								<option value="159">Dongying</option>
+								<option value="160">Yantai</option>
+								<option value="161">Weifang</option>
+								<option value="162">Jining</option>
+								<option value="163">Tai'an</option>
+								<option value="164">Weihai</option>
+								<option value="165">Rizhao</option>
+								<option value="166">Laiwu</option>
+								<option value="167">Linyi</option>
+								<option value="168">Dezhou</option>
+								<option value="169">Liaocheng</option>
+								<option value="170">Binzhou</option>
+								<option value="171">Zhengzhou</option>
+								<option value="172">Kaifeng</option>
+								<option value="173">Luoyang</option>
+								<option value="174">Pingdingshan</option>
+								<option value="175">Anyang</option>
+								<option value="176">Hebi</option>
+								<option value="177">Xinxiang</option>
+								<option value="178">Jiaozuo</option>
+								<option value="179">Puyang</option>
+								<option value="180">Xuchang</option>
+								<option value="181">Luohe</option>
+								<option value="182">Sanmenxia</option>
+								<option value="183">Nanyang</option>
+								<option value="184">Shangqiu</option>
+								<option value="185">Shangqiu</option>
+								<option value="186">Zhoukou</option>
+								<option value="187">Zhumadian</option>
+								<option value="188">Wuhan</option>
+								<option value="189">Yichang</option>
+								<option value="190">Jingzhou</option>
+								<option value="191">Xiangyang</option>
+								<option value="192">Huangshi</option>
+								<option value="193">Jingmen</option>
+								<option value="194">Huanggang</option>
+								<option value="195">Shiyan</option>
+								<option value="196">Enshi City</option>
+								<option value="197">Qianjiang</option>
+								<option value="198">Tianmen</option>
+								<option value="199">Xiantao</option>
+								<option value="200">Suizhou</option>
+								<option value="201">Xianning</option>
+								<option value="202">Xiaogan</option>
+								<option value="203">Changsha</option>
+								<option value="204">Changde</option>
+								<option value="205">Zhuzhou</option>
+								<option value="206">Xiangtan</option>
+								<option value="207">Hengyang</option>
+								<option value="208">Yueyang</option>
+								<option value="209">Shaoyang</option>
+								<option value="210">Yiyang</option>
+								<option value="211">Loudi</option>
+								<option value="212">Huaihua</option>
+								<option value="213">Chenzhou</option>
+								<option value="214">Yongzhou</option>
+								<option value="215">Xiangxi Tujia and Miao Autonomous Prefecture</option>
+								<option value="216">Guangzhou</option>
+								<option value="217">Shenzhen</option>
+								<option value="218">Zhuhai</option>
+								<option value="219">Shantou</option>
+								<option value="220">Dongguan</option>
+								<option value="221">Zhongshan</option>
+								<option value="222">Foshan</option>
+								<option value="223">Shaoguan</option>
+								<option value="224">Jiangmen</option>
+								<option value="225">Zhanjiang</option>
+								<option value="226">Maoming</option>
+								<option value="227">Zhaoqing</option>
+								<option value="228">Huizhou</option>
+								<option value="229">Meizhou</option>
+								<option value="230">Shanwei</option>
+								<option value="231">Heyuan</option>
+								<option value="232">Yangjiang</option>
+								<option value="233">Qingyuan</option>
+								<option value="234">Chaozhou</option>
+								<option value="235">Jieyang</option>
+								<option value="236">Nanning</option>
+								<option value="237">Liuzhou</option>
+								<option value="238">Guilin</option>
+								<option value="239">Wuzhou</option>
+								<option value="240">Beihai</option>
+								<option value="241">Fangchenggang</option>
+								<option value="242">Qinzhou</option>
+								<option value="243">Guigang</option>
+								<option value="244">Yulin</option>
+								<option value="245">Hezhou</option>
+								<option value="246">Baise</option>
+								<option value="247">Haikou</option>
+								<option value="248">Chengdu</option>
+								<option value="249">Mianyang</option>
+								<option value="250">Deyang</option>
+								<option value="251">Zigong</option>
+								<option value="252">Panzhihua</option>
+								<option value="253">Guangyuan</option>
+								<option value="254">Neijiang</option>
+								<option value="255">Leshan</option>
+								<option value="256">Nanchong</option>
+								<option value="257">Yibin</option>
+								<option value="258">Guang'an</option>
+								<option value="259">Dachuan</option>
+								<option value="260">Ya'an</option>
+								<option value="261">Meishan</option>
+								<option value="262">Garzê Tibetan Autonomous Prefecture</option>
+								<option value="263">Liangshan Yi Autonomous Prefecture</option>
+								<option value="264">Guiyang</option>
+								<option value="265">Liupanshui</option>
+								<option value="266">Zunyi</option>
+								<option value="267">Anshun</option>
+								<option value="268">Tongren</option>
+								<option value="269">Qianxinan Buyei and Miao Autonomous Prefecture</option>
+								<option value="270">Bijie</option>
+								<option value="271">Qiandongnan Miao and Dong Autonomous Prefecture</option>
+								<option value="272">Kunming</option>
+								<option value="273">Dali</option>
+								<option value="274">Qujing</option>
+								<option value="275">Yuxi</option>
+								<option value="276">Zhaotong</option>
+								<option value="277">Chuxiong City</option>
+								<option value="278">Honghe Hani and Yi Autonomous Prefecture</option>
+								<option value="279">Wenshan City</option>
+								<option value="281">Xishuangbanna Dai Autonomous Prefecture</option>
+								<option value="282">Baoshan</option>
+								<option value="283">Dehong Dai and Jingpo Autonomous Prefecture</option>
+								<option value="284">Lijiang</option>
+								<option value="285">Nujiang Lisu Autonomous Prefecture</option>
+								<option value="286">Diqing Tibetan Autonomous Prefecture</option>
+								<option value="287">Lhasa</option>
+								<option value="288">Shigatse</option>
+								<option value="289">Shannan</option>
+								<option value="290">Nyingchi</option>
+								<option value="291">Chengguan</option>
+								<option value="292">Ngari Prefecture</option>
+								<option value="293">Xi'an</option>
+								<option value="294">Baoji</option>
+								<option value="295">Xianyang</option>
+								<option value="296">Tongchuan</option>
+								<option value="297">Weinan</option>
+								<option value="298">Yan'an</option>
+								<option value="299">Yulin</option>
+								<option value="300">Hanzhong</option>
+								<option value="301">Ankang</option>
+								<option value="302">Lanzhou</option>
+								<option value="303">Jiayuguan City</option>
+								<option value="304">Jinchang</option>
+								<option value="305">Baiyin</option>
+								<option value="306">Tianshui</option>
+								<option value="307">Jiuquan</option>
+								<option value="308">Zhangye</option>
+								<option value="309">Wuwei</option>
+								<option value="310">Dingxi</option>
+								<option value="311">Longnan</option>
+								<option value="312">Pingliang</option>
+								<option value="313">Qingyang</option>
+								<option value="314">Linxia City</option>
+								<option value="315">Yinchuan</option>
+								<option value="316">Shizuishan</option>
+								<option value="317">Wuzhong</option>
+								<option value="318">Xining</option>
+								<option value="319">Haidong</option>
+								<option value="321">Haibei Tibetan Autonomous Prefecture</option>
+								<option value="322">Huangnan Tibetan Autonomous Prefecture</option>
+								<option value="323">Yushu Tibetan Autonomous Prefecture</option>
+								<option value="324">Golog Tibetan Autonomous Prefecture</option>
+								<option value="325">Ürümqi</option>
+								<option value="326">Shihezi</option>
+								<option value="327">Karamay</option>
+								<option value="328">Ili Kazakh Autonomous Prefecture</option>
+								<option value="330">Changji Hui Autonomous Prefecture</option>
+								<option value="331">Kizilsu Kirghiz Autonomous Prefecture</option>
+								<option value="332">Bortala Mongol Autonomous Prefecture</option>
+								<option value="333">Turpan</option>
+								<option value="334">Hami City</option>
+								<option value="335">Kashgar Prefecture</option>
+								<option value="336">Hotan</option>
+								<option value="337">Taipei</option>
+								<option value="339">Taichung</option>
+								<option value="340">Tainan</option>
+								<option value="355">Ordos City</option>
+								<option value="356">Tongliao</option>
+								<option value="357">Qiannan Buyei and Miao Autonomous Prefecture</option>
+								<option value="358">Daxing'anling Prefecture</option>
+								<option value="359">Shangluo</option>
+								<option value="360">Guyuan</option>
+								<option value="361">Zhongwei</option>
+								<option value="362">Yunfu</option>
+								<option value="363">Xiangyang</option>
+								<option value="364">Ezhou</option>
+								<option value="365">Hengshui</option>
+								<option value="366">Ningde</option>
+								<option value="367">Huai'an</option>
+								<option value="368">Tacheng Prefecture</option>
+								<option value="369">Shangrao</option>
+								<option value="370">Xinyu</option>
+								<option value="371">Zhangjiajie</option>
+								<option value="372">Shennongjia</option>
+								<option value="373">Suining</option>
+								<option value="374">Bazhong</option>
+								<option value="375">Luzhou</option>
+								<option value="376">Ziyang</option>
+								<option value="377">Dazhou</option>
+								<option value="378">Hechi</option>
+								<option value="379">Lishui</option>
+								<option value="380">Bozhou</option>
+								<option value="381">Yanbian Korean Autonomous Prefecture</option>
+								<option value="382">Huludao</option>
+								<option value="383">Yuncheng</option>
+								<option value="384">Sanya</option>
+								<option value="385">Laibin</option>
+								<option value="386">Bayingolin Mongol Autonomous Prefecture</option>
+								<option value="387">Aksu Prefecture</option>
+								<option value="388">Lincang</option>
+								<option value="389">Gannan Tibetan Autonomous Prefecture</option>
+								<option value="390">Altay Prefecture</option>
+								<option value="391">Haixi Mongol and Tibetan Autonomous Prefecture</option>
+								<option value="393">Jiyuan</option>
+								<option value="394">Chongzuo</option>
+								<option value="395">Heze</option>
+								<option value="396">Ngawa Tibetan and Qiang Autonomous Prefecture</option>
+								<option value="397">Wujiaqu</option>
+								<option value="398">Nagqu Prefecture</option>
+								<option value="399">Alar</option>
+								<option value="400">Wenchang</option>
+								<option value="401">Danzhou</option>
+								<option value="402">Wanning</option>
+								<option value="403">Qionghai</option>
+								<option value="404">Ding'an County</option>
+								<option value="405">Tunchang County</option>
+								<option value="406">Wuzhishan City</option>
+								<option value="407">Chengmai County</option>
+								<option value="408">Lingao County</option>
+								<option value="409">Dongfang</option>
+								<option value="410">Hainan Tibetan Autonomous Prefecture</option>
+								<option value="411">Pu'er City</option>
+								
+							<% elsif @type.to_s == "baidu" %>
+							
+							
+							
+							
+								<option value="9999999">All</option>
+								<option value="">None</option>
+								<option value="1000">Beijing</option>
+								<option value="2000">Shanghai</option>
+								<option value="3000">Tianjin</option>
+								<option value="4000">Guangdong</option>
+								<option value="5000">Fujian</option>
+								<option value="8000">Hainan</option>
+								<option value="9000">Anhui</option>
+								<option value="10000">Guizhou</option>
+								<option value="11000">Gansu</option>
+								<option value="12000">Guangxi</option>
+								<option value="13000">Hebei</option>
+								<option value="14000">Henan</option>
+								<option value="15000">Heilongjiang</option>
+								<option value="16000">Hubei</option>
+								<option value="17000">Hunan</option>
+								<option value="18000">Jilin</option>
+								<option value="19000">Jiangsu</option>
+								<option value="20000">Jiangxi</option>
+								<option value="21000">Liaoning</option>
+								<option value="22000">Inner Mongolia</option>
+								<option value="23000">Ningxia</option>
+								<option value="24000">Qinghai</option>
+								<option value="25000">Shandong</option>
+								<option value="26000">Shanxi</option>
+								<option value="27000">Shaanxi</option>
+								<option value="28000">Sichuan</option>
+								<option value="29000">Tibet</option>
+								<option value="30000">Xinjiang</option>
+								<option value="31000">Yunnan</option>
+								<option value="32000">Zhejiang</option>
+								<option value="33000">Chongqing</option>
+								<option value="34000">HK</option>
+								<option value="35000">Taiwan</option>
+								<option value="36000">Macau</option>
+								<option value="200000">Japan</option>
+								<option value="300000">Other country(except Japan)</option>
+								<option value="4085">Chaozhou</option>
+								<option value="4116">Dongguan</option>
+								<option value="4090">Foshan</option>
+								<option value="4084">Guangzhou</option>
+								<option value="4115">Heyuan</option>
+								<option value="4117">Huizhou</option>
+								<option value="4082">Jiangmen</option>
+								<option value="4083">Jieyang</option>
+								<option value="4086">Maoming</option>
+								<option value="4088">Meizhou</option>
+								<option value="4089">Qingyuan</option>
+								<option value="4091">Shantou</option>
+								<option value="4092">Shanwei</option>
+								<option value="4094">Shaoguan</option>
+								<option value="4093">Shenzhen</option>
+								<option value="4109">Yangjiang</option>
+								<option value="4111">Yunfu</option>
+								<option value="4110">Zhanjiang</option>
+								<option value="4114">Zhaoqing</option>
+								<option value="4112">Zhongshan</option>
+								<option value="4113">Zhuhai</option>
+								<option value="5081">Fuzhou</option>
+								<option value="5050">Longyan</option>
+								<option value="5049">Nanping</option>
+								<option value="5051">Ningde</option>
+								<option value="5048">Putien</option>
+								<option value="5052">Quanzhou</option>
+								<option value="5066">Sanming</option>
+								<option value="5070">Xiamen</option>
+								<option value="5080">Zhangzhou</option>
+								<option value="8493">Baisha Li Autonomous County</option>
+								<option value="8488">Baoting Li and Miao Autonomous County</option>
+								<option value="8492">Changjiang Li Autonomous County</option>
+								<option value="8487">Chengmai County</option>
+								<option value="8303">Danzhou</option>
+								<option value="8484">Ding'an County</option>
+								<option value="8296">Dongfang</option>
+								<option value="8302">Haikou</option>
+								<option value="8490">Ledong Li Autonomous County</option>
+								<option value="8491">Lingao County</option>
+								<option value="8486">Lingshui Li Autonomous County</option>
+								<option value="8297">Qionghai</option>
+								<option value="8489">Qiongzhong Li and Miao Autonomous County</option>
+								<option value="8298">Sanya</option>
+								<option value="8485">Tunchang County</option>
+								<option value="8301">Wanning</option>
+								<option value="8299">Liuzhou</option>
+								<option value="8299">Wenchang</option>
+								<option value="8300">Wuzhishan</option>
+								<option value="9128">Anqing</option>
+								<option value="9141">Bengbu</option>
+								<option value="9143">Bozhou</option>
+								<option value="9129">Chaohu</option>
+								<option value="9130">Chizhou</option>
+								<option value="9131">Chuzhou</option>
+								<option value="9140">Fuyang</option>
+								<option value="9142">Hefei</option>
+								<option value="9127">Huaibei</option>
+								<option value="9133">Huainan</option>
+								<option value="9132">Huangshan</option>
+								<option value="9135">Lu'an</option>
+								<option value="9134">Ma'anshan</option>
+								<option value="9138">Yi'an District</option>
+								<option value="9139">Wuhu</option>
+								<option value="9137">Suzhou</option>
+								<option value="9136">Xuancheng</option>
+								<option value="10119">Anshun</option>
+								<option value="10124">Bijie</option>
+								<option value="10118">Guiyang</option>
+								<option value="10120">Liupanshui</option>
+								<option value="10122">Qiandongnan Miao and Dong Autonomous Prefecture</option>
+								<option value="10121">Qiannan Buyei and Miao Autonomous Prefecture</option>
+								<option value="10123">Qianxinan Buyei and Miao Autonomous Prefecture</option>
+								<option value="10125">Tongren</option>
+								<option value="10126">Zunyi</option>
+								<option value="11267">Baiyin</option>
+								<option value="11263">Dingxi</option>
+								<option value="11477">Gannan Tibetan Autonomous Prefecture</option>
+								<option value="11257">Jiayuguan</option>
+								<option value="11256">Jinchang</option>
+								<option value="11255">Jiuquan</option>
+								<option value="11258">Lanzhou</option>
+								
+								
+								<option value="11261">Linxia</option>
+								<option value="11259">Longnan</option>
+								<option value="11260">Pingliang</option>
+								<option value="11262">Qingyang</option>
+								<option value="11265">Tianshui</option>
+								<option value="11264">Wuwei</option>
+								<option value="11266">Zhangye</option>
+								<option value="12108">Baise</option>
+								<option value="12104">Beihai</option>
+								<option value="12478">Chongzuo</option>
+								<option value="12098">Fangchenggang</option>
+								<option value="12096">Guigang</option>
+								<option value="12095">Guilin</option>
+								
+								<option value="12106">Hechi</option>
+								<option value="12107">Hezhou</option>
+								<option value="12100">Laibin</option>
+								<option value="12101">Liuzhou</option>
+								<option value="12099">Nanning</option>
+								<option value="12102">Qinzhou</option>
+								<option value="12103">Wuzhou</option>
+								<option value="12105">Yulin</option>
+								<option value="13304">Baoding</option>
+								<option value="13305">Cangzhou</option>
+								<option value="13306">Chengde</option>
+								<option value="13330">Handan</option>
+								<option value="13332">Hengshui</option>
+								<option value="13307">Langfang</option>
+								<option value="13325">Qinhuangdao</option>
+								<option value="13327">Shijiazhuang</option>
+								<option value="13329">Tangshan</option>
+								<option value="13326">Xingtai</option>
+								<option value="13331">Zhangjiakou</option>
+								<option value="14309">Anyang</option>
+								<option value="14323">Hebi</option>
+								<option value="14476">Jiyuan</option>
+								<option value="14308">Jiaozuo</option>
+								<option value="14310">Kaifeng</option>
+								<option value="14311">Luoyang</option>
+								<option value="14312">Luohe</option>
+								<option value="14315">Nanyang</option>
+								<option value="14313">Pingdingshan</option>
+								<option value="14316">Puyang</option>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+								<option value="14321">Sanmenxia</option>
+								<option value="14320">Shangqiu</option>
+								<option value="14317">Xinxiang County</option>
+								<option value="14318">Xinyang</option>
+								<option value="14319">Xuchang</option>
+								<option value="14322">Zhengzhou</option>
+								<option value="14324">Zhoukou</option>
+								<option value="14314">Zhumadian</option>
+								<option value="15342">Daqing</option>
+								<option value="15343">Daxing'anling Prefecture</option>
+								<option value="15335">Harbin</option>
+								<option value="15344">Hegang</option>
+								<option value="15345">Heihe</option>
+								<option value="15333">Jixi</option>
+								<option value="15334">Jiamusi</option>
+								<option value="15336">Mudanjiang</option>
+								<option value="15338">Qitaihe</option>
+								<option value="15337">Qiqihar</option>
+								<option value="15340">Shuangyashan</option>
+								<option value="15339">Suihua</option>
+								<option value="15341">Yichun</option>
+								<option value="16377">Ezhou</option>
+								<option value="16366">Enshi</option>
+								<option value="16349">Huanggang</option>
+								<option value="16348">Huangshi</option>
+								<option value="16346">Jingmen</option>
+								<option value="16347">Jingzhou</option>
+								<option value="16364">Qianjiang</option>
+								<option value="16368">Shennongjia</option>
+								<option value="16369">Shiyan</option>
+								<option value="16367">Suizhou</option>
+								<option value="16373">Tianmen</option>
+								<option value="16371">Wuhan</option>
+								<option value="16372">Xiantao</option>
+								<option value="16375">Xianning</option>
+								<option value="16370">Xiangyang</option>
+								<option value="16365">Xiaogan</option>
+								<option value="16376">Yichang</option>
+								<option value="17351">Changde</option>
+								<option value="17353">Chenzhou</option>
+								<option value="17360">Hengyang</option>
+								<option value="17350">Huaihua</option>
+								
+								<option value="17354">Loudi</option>
+								<option value="17355">Shaoyang</option>
+								<option value="17356">Xiangtan</option>
+								<option value="17357">Xiangxi Tujia and Miao Autonomous Prefecture</option>
+								<option value="17359">Yiyang</option>
+								<option value="17362">Yongzhou</option>
+								<option value="17361">Yueyang</option>
+								<option value="17358">Zhangjiajie</option>
+								<option value="17352">Changsha</option>
+								<option value="17363">Zhuzhou</option>
+								<option value="18039">Baicheng</option>
+								<option value="18042">Baishan</option>
+								<option value="18038">Jilin</option>
+								<option value="18041">Liaoyuan</option>
+								<option value="18043">Siping</option>
+								<option value="18044">Songyuan</option>
+								<option value="18045">Tonghua</option>
+								<option value="18047">Yanbian Korean Autonomous Prefecture</option>
+								<option value="18040">Changchun</option>
+								<option value="19054">Changzhou</option>
+								<option value="19053">Huai'an</option>
+								<option value="19057">Lianyungang</option>
+								<option value="19055">Nanjing</option>
+								<option value="19056">Nantong</option>
+								<option value="19059">Suzhou</option>
+								<option value="19061">Taizhou</option>
+								<option value="19062">Wuxi</option>
+								<option value="19060">Suqian</option>
+								<option value="19058">Xuzhou</option>
+								<option value="19063">Yancheng</option>
+								<option value="19064">Yangzhou</option>
+								<option value="19065">Zhenjiang</option>
+								<option value="20078">Fuzhou</option>
+								<option value="20077">Ganzhou</option>
+								<option value="20068">Ji'an</option>
+								<option value="20069">Jingdezhen</option>
+								<option value="20067">Jiujiang</option>
+								<option value="20072">Nanchang</option>
+								<option value="20071">Pingxiang</option>
+								<option value="20074">Shangrao</option>
+								<option value="20073">Xinyu</option>
+								<option value="20075">Yichun</option>
+								<option value="20076">Yingtan</option>
+								<option value="21151">Anshan</option>
+								<option value="21145">Benxi</option>
+								<option value="21147">Chaoyang</option>
+								<option value="21155">Dalian</option>
+								<option value="21144">Dandong</option>
+								<option value="21152">Fushun</option>
+								<option value="21150">Fuxin</option>
+								<option value="21157">Huludao</option>
+								<option value="21146">Jinzhou</option>
+								<option value="21148">Liaoyang</option>
+								<option value="21149">Panjin</option>
+								<option value="21153">Shenyang</option>
+								<option value="21154">Tieling</option>
+								<option value="21156">Yingkou</option>
+								<option value="22159">Alxa League</option>
+								<option value="22162">Bayannur</option>
+								<option value="22169">Baotou</option>
+								<option value="22158">Chifeng</option>
+								<option value="22168">Ordos City</option>
+								<option value="22167">Hohhot</option>
+								<option value="22166">Hulunbuir</option>
+								<option value="22161">Tongliao</option>
+								<option value="22164">Wuhai</option>
+								<option value="22163">Ulanqab</option>
+								<option value="22165">Xilingol League</option>
+								<option value="22160">Hinggan League</option>
+								<option value="23170">Guyuan</option>
+								<option value="23171">Shizuishan</option>
+								<option value="23172">Wuzhong</option>
+								<option value="23174">Yinchuan</option>
+								<option value="23173">Zhongwei</option>
+								<option value="24496">Golog Tibetan Autonomous Prefecture</option>
+								<option value="24494">Haibei Tibetan Autonomous Prefecture</option>
+								<option value="24176">Haidong</option>
+								<option value="24479">Hainan</option>
+								<option value="24177">Haixi Mongol and Tibetan Autonomous Prefecture</option>
+								<option value="24495">Huangnan Tibetan Autonomous Prefecture</option>
+								<option value="24175">Xining</option>
+								<option value="24178">Yushu Tibetan Autonomous Prefecture</option>
+								<option value="25223">Binzhou</option>
+								<option value="25200">Dezhou</option>
+								<option value="25220">Dongying</option>
+								<option value="25222">Heze</option>
+								<option value="25196">Jinan</option>
+								<option value="25197">Jining</option>
+								<option value="25198">Laiwu</option>
+								<option value="25199">Liaocheng</option>
+								<option value="25201">Linyi</option>
+								<option value="25202">Qingdao</option>
+								<option value="25203">Rizhao</option>
+								<option value="25208">Tai'an</option>
+								<option value="25218">Weihai</option>
+								<option value="25204">Weifang</option>
+								<option value="25219">Yantai</option>
+								<option value="25221">Zaozhuang</option>
+								<option value="25207">Zibo</option>
+								<option value="26217">Datong</option>
+								<option value="26205">Jincheng</option>
+								<option value="26206">Jinzhong</option>
+								<option value="26211">Linfen</option>
+								<option value="26210">Lüliang</option>
+								<option value="26213">Shuozhou</option>
+								<option value="26214">Taiyuan</option>
+								<option value="26212">Xinzhou</option>
+								<option value="26215">Yangquan</option>
+								<option value="26216">Yuncheng</option>
+								
+								<option value="26209">Changzhi</option>
+								<option value="27240">Ankang</option>
+								<option value="27239">Baoji</option>
+								<option value="27248">Hanzhong</option>
+								<option value="27241">Shangluo</option>
+								<option value="27242">Tongchuan</option>
+								<option value="27243">Weinan</option>
+								<option value="27244">Xi'an</option>
+								<option value="27245">Xianyang</option>
+								<option value="27246">Yan'an</option>
+								<option value="27249">Yulin</option>
+								<option value="28252">Aba</option>
+								<option value="28247">Bazhong</option>
+								<option value="28226">Chengdu</option>
+								<option value="28250">Dazhou</option>
+								<option value="28232">Deyang</option>
+								<option value="28236">Garzê Tibetan Autonomous Prefecture</option>
+								<option value="28224">Guang'an</option>
+								<option value="28225">Guangyuan</option>
+								<option value="28233">Leshan</option>
+								<option value="28228">Liangshan</option>
+								<option value="28234">Luzhou</option>
+								<option value="28227">Meishan</option>
+								<option value="28229">Mianyang</option>
+								<option value="28231">Nanchong</option>
+								<option value="28235">Neijiang</option>
+								<option value="28230">Panzhihua</option>
+								<option value="28237">Suining</option>
+								<option value="28251">Ya'an</option>
+								<option value="28254">Yibin</option>
+								<option value="28238">Ziyang</option>
+								<option value="28253">Zigong</option>
+								<option value="29498">Ali</option>
+								<option value="29480">Chengguan</option>
+								<option value="29269">Lhasa</option>
+								<option value="29270">Nyingchi</option>
+								<option value="29268">Nagqu Prefecture</option>
+								<option value="29271">Shigatse</option>
+								<option value="29497">Shannan</option>
+								<option value="30185">Aksu Prefecture</option>
+								<option value="30499">Alar</option>
+								<option value="30182">Altay Prefecture</option>
+								<option value="30191">Bayingolin Mongol Autonomous Prefecture</option>
+								<option value="30180">Bortala Mongol Autonomous Prefecture</option>
+								<option value="30181">Changji</option>
+								<option value="30179">Hami City</option>
+								<option value="30195">Hotan</option>
+								<option value="30183">Kashgar</option>
+								<option value="30184">Karamay</option>
+								<option value="30186">Kizilsu Kirghiz Autonomous Prefecture</option>
+								<option value="30187">Shihezi</option>
+								<option value="30188">Tacheng Prefecture</option>
+								<option value="30500">Tumxuk</option>
+								<option value="30190">Turpan</option>
+								<option value="30192">Ürümqi</option>
+								<option value="30189">Wujiaqu</option>
+								<option value="30193">Ili Kazakh Autonomous Prefecture</option>
+								<option value="31289">Baoshan</option>
+								<option value="31283">Chuxiong City</option>
+								<option value="31292">Dali</option>
+								<option value="31286">Dehong Dai and Jingpo Autonomous Prefecture</option>
+								<option value="31482">Diqing Tibetan Autonomous Prefecture</option>
+								<option value="31293">Honghe</option>
+								<option value="31284">Kunming</option>
+								<option value="31285">Lijiang</option>
+								<option value="31287">Lincang</option>
+								<option value="31481">Nujiang Lisu Autonomous Prefecture</option>
+								<option value="31290">Pu'er City</option>
+								<option value="31288">Qujing</option>
+								<option value="31291">Wenshan City</option>
+								<option value="31483">Xishuangbanna Dai Autonomous Prefecture</option>
+								<option value="31295">Yuxi</option>
+								<option value="31294">Zhaotong</option>
+								<option value="32280">Hangzhou</option>
+								<option value="32282">Huzhou</option>
+								<option value="32273">Jiaxing</option>
+								<option value="32272">Jinhua</option>
+								<option value="32275">Lishui</option>
+								<option value="32276">Ningbo</option>
+								<option value="32274">Quzhou</option>
+								<option value="32277">Shaoxing</option>
+								<option value="32279">Taizhou</option>
+								<option value="32278">Wenzhou</option>
+								<option value="32281">Zhoushan</option>
+							
+							
+							<% elsif @type.to_s == "shenma" %>	
+							
+								<option value="18874368">HK</option>
+								<option value="18939904">Macau</option>
+								<option value="19005440">Taiwan</option>
+								<option value="">None</option>
+								<option value="16842752">Beijing</option>
+								<option value="16908288">Tianjin</option>
+								<option value="16973824">Hebei</option>
+								<option value="16974080">Shijiazhuang</option>
+								<option value="16974336">Tangshan</option>
+								<option value="16974592">Qinhuangdao</option>
+								<option value="16974848">Handan</option>
+								<option value="16975104">Xingtai</option>
+								<option value="16975360">Baoding</option>
+								<option value="16975616">Zhangjiakou</option>
+								<option value="16975872">Chengde</option>
+								<option value="16976128">Langfang</option>
+								<option value="16976384">Hengshui</option>
+								<option value="16976640">Cangzhou</option>
+								<option value="17039360">Shanxi</option>
+								<option value="17039616">Taiyuan</option>
+								<option value="17039872">Datong</option>
+								<option value="17040128">Yangquan</option>
+								<option value="17040384">Changzhi</option>
+								<option value="17040640">Jincheng</option>
+								<option value="17040896">Shuozhou</option>
+								<option value="17041152">Jinzhong</option>
+								<option value="17041408">Yuncheng</option>
+								<option value="17041664">Xinzhou</option>
+								<option value="17041920">Linfen</option>
+								<option value="17042176">Lüliang</option>
+								<option value="17104896">Inner Mongolia</option>
+								<option value="17105152">Hohhot</option>
+								<option value="17105408">Baotou</option>
+								<option value="17105664">Wuhai</option>
+								<option value="17105920">Chifeng</option>
+								<option value="17106176">Tongliao</option>
+								<option value="17106432">Ordos City</option>
+								<option value="17106688">Hulunbuir</option>
+								<option value="17106944">Ulanqab</option>
+								<option value="17107200">Xilingol League</option>
+								<option value="17107456">Bayannur</option>
+								<option value="17107712">Alxa League</option>
+								<option value="17107968">Hinggan League</option>
+								<option value="17170432">Liaoning</option>
+								<option value="17170688">Shenyang</option>
+								<option value="17170944">Dalian</option>
+								<option value="17171200">Anshan</option>
+								<option value="17171456">Fushun</option>
+								<option value="17171712">Benxi</option>
+								<option value="17171968">Dandong</option>
+								<option value="17172224">Jinzhou</option>
+								<option value="17172480">Huludao</option>
+								<option value="17172736">Yingkou</option>
+								<option value="17172992">Panjin</option>
+								<option value="17173248">Fuxin</option>
+								<option value="17173504">Liaoyang</option>
+								<option value="17173760">Tieling</option>
+								<option value="17174016">Chaoyang</option>
+								<option value="17235968">Jilin</option>
+								<option value="17236224">Changchun</option>
+								<option value="17236480">Jilin</option>
+								<option value="17236736">Siping</option>
+								<option value="17236992">Liaoyuan</option>
+								<option value="17237248">Tonghua</option>
+								<option value="17237504">Baishan</option>
+								<option value="17237760">Yanbian Korean Autonomous Prefecture</option>
+								<option value="17238016">Baicheng</option>
+								<option value="17238272">Songyuan</option>
+								<option value="17301504">Heilongjiang</option>
+								<option value="17301760">Harbin</option>
+								<option value="17302016">Qiqihar</option>
+								<option value="17302272">Hegang</option>
+								<option value="17302528">Shuangyashan</option>
+								<option value="17302784">Jixi</option>
+								<option value="17303040">Daqing</option>
+								<option value="17303296">Yichun</option>
+								<option value="17303552">Mudanjiang</option>
+								<option value="17303808">Jiamusi</option>
+								<option value="17304064">Qitaihe</option>
+								<option value="17304320">Heihe</option>
+								<option value="17304576">Suihua</option>
+								<option value="17304832">Daxing'anling Prefecture</option>
+								<option value="17367040">Shanghai</option>
+								<option value="17432576">Jiangsu</option>
+								<option value="17432832">Nanjing</option>
+								<option value="17433088">Xuzhou</option>
+								<option value="17433344">Lianyungang</option>
+								<option value="17433600">Huai'an</option>
+								<option value="17433856">Suqian</option>
+								<option value="17434112">Yancheng</option>
+								<option value="17434368">Yangzhou</option>
+								<option value="17434624">Taizhou</option>
+								<option value="17434880">Nantong</option>
+								<option value="17435136">Zhenjiang</option>
+								<option value="17435392">Changzhou</option>
+								<option value="17435648">Wuxi</option>
+								<option value="17435904">Suzhou</option>
+								<option value="17498112">Zhejiang</option>
+								<option value="17498368">Hangzhou</option>
+								<option value="17498624">Ningbo</option>
+								<option value="17498880">Wenzhou</option>
+								<option value="17499136">Jiaxing</option>
+								<option value="17499392">Huzhou</option>
+								<option value="17499648">Shaoxing</option>
+								<option value="17499904">Jinhua</option>
+								<option value="17500160">Quzhou</option>
+								<option value="17500416">Zhoushan</option>
+								<option value="17500672">Taizhou</option>
+								<option value="17500928">Lishui</option>
+								<option value="17563648">Anhui</option>
+								<option value="17563904">Hefei</option>
+								<option value="17564160">Wuhu</option>
+								<option value="17564416">Bengbu</option>
+								<option value="17564672">Huainan</option>
+								<option value="17564928">Ma'anshan</option>
+								<option value="17565184">Huaibei</option>
+								<option value="17565440">Tongling</option>
+								<option value="17565696">Anqing</option>
+								<option value="17565952">Huangshan</option>
+								<option value="17566208">Chuzhou</option>
+								<option value="17566464">Fuyang</option>
+								<option value="17566720">Suzhou</option>
+								<option value="17567232">Lu'an</option>
+								<option value="17567488">Bozhou</option>
+								<option value="17567744">Chizhou</option>
+								<option value="17568000">Xuancheng</option>
+								<option value="17629184">Fujian</option>
+								<option value="17629440">Fuzhou</option>
+								<option value="17629696">Xiamen</option>
+								<option value="17629952">Sanming</option>
+								<option value="17630208">Putien</option>
+								<option value="17630464">Quanzhou</option>
+								<option value="17630720">Zhangzhou</option>
+								<option value="17630976">Nanping</option>
+								<option value="17631232">Longyan</option>
+								<option value="17631488">Ningde</option>
+								<option value="17631744">Pingtan County</option>
+								<option value="17694720">Jiangxi</option>
+								<option value="17694976">Nanchang</option>
+								<option value="17695232">Jingdezhen</option>
+								<option value="17695488">Pingxiang</option>
+								<option value="17695744">Jiujiang</option>
+								<option value="17696000">Xinyu</option>
+								<option value="17696256">Yingtan</option>
+								<option value="17696512">Ganzhou</option>
+								<option value="17696768">Ji'an</option>
+								<option value="17697024">Yichun</option>
+								<option value="17697280">Fuzhou</option>
+								<option value="17697536">Shangrao</option>
+								<option value="17760256">Shandong</option>
+								<option value="17760512">Jinan</option>
+								<option value="17760768">Qingdao</option>
+								<option value="17761024">Zibo</option>
+								<option value="17761280">Zaozhuang</option>
+								<option value="17761536">Dongying</option>
+								<option value="17761792">Weifang</option>
+								<option value="17762048">Yantai</option>
+								<option value="17762304">Weihai</option>
+								<option value="17762560">Jining</option>
+								<option value="17762816">Tai'an</option>
+								<option value="17763072">Rizhao</option>
+								<option value="17763328">Laiwu</option>
+								<option value="17763584">Linyi</option>
+								<option value="17763840">Dezhou</option>
+								<option value="17764096">Liaocheng</option>
+								<option value="17764352">Binzhou</option>
+								<option value="17764608">Heze</option>
+								<option value="17825792">Henan</option>
+								<option value="17826048">Zhengzhou</option>
+								<option value="17826304">Kaifeng</option>
+								<option value="17826560">Luoyang</option>
+								<option value="17826816">Pingdingshan</option>
+								<option value="17827072">Jiaozuo</option>
+								<option value="17827328">Hebi</option>
+								<option value="17827584">Xinxiang</option>
+								<option value="17827840">Anyang</option>
+								<option value="17828096">Puyang</option>
+								<option value="17828352">Xuchang</option>
+								<option value="17828608">Luohe</option>
+								<option value="17828864">Sanmenxia</option>
+								<option value="17829120">Nanyang</option>
+								<option value="17829376">Shangqiu</option>
+								<option value="17829632">Xinyang</option>
+								<option value="17829888">Zhoukou</option>
+								<option value="17830144">Zhumadian</option>
+								<option value="17830400">Jiyuan</option>
+								<option value="17891328">Hubei</option>
+								<option value="17891584">Wuhan</option>
+								<option value="17891840">Huangshi</option>
+								<option value="17892096">Xiangyang</option>
+								<option value="17892352">Shiyan</option>
+								<option value="17892608">Jingzhou</option>
+								<option value="17892864">Yichang</option>
+								<option value="17893120">Jingmen</option>
+								<option value="17893376">Ezhou</option>
+								<option value="17893632">Xiaogan</option>
+								<option value="17893888">Huanggang</option>
+								<option value="17894144">Xianning</option>
+								<option value="17894400">Suizhou</option>
+								<option value="17894656">Enshi City</option>
+								<option value="17894912">Xiantao</option>
+								<option value="17895168">Tianmen</option>
+								<option value="17895424">Qianjiang</option>
+								<option value="17895680">Shennongjia</option>
+								<option value="17956864">Hunan</option>
+								<option value="17957120">Changsha</option>
+								<option value="17957376">Zhuzhou</option>
+								<option value="17957632">Xiangtan</option>
+								<option value="17957888">Hengyang</option>
+								<option value="17958144">Shaoyang</option>
+								<option value="17958400">Yueyang</option>
+								<option value="17958656">Changde</option>
+								<option value="17958912">Zhangjiajie</option>
+								<option value="17959168">Yiyang</option>
+								<option value="17959424">Chenzhou</option>
+								<option value="17959680">Yongzhou</option>
+								<option value="17959936">Huaihua</option>
+								<option value="17960192">Loudi</option>
+								<option value="17960448">Xiangxi Tujia and Miao Autonomous Prefecture</option>
+								<option value="18022400">Guangdong</option>
+								<option value="18022656">Guangzhou</option>
+								<option value="18022912">Shenzhen</option>
+								<option value="18023168">Zhuhai</option>
+								<option value="18023424">Shantou</option>
+								<option value="18023680">Shaoguan</option>
+								<option value="18023936">Heyuan</option>
+								<option value="18024192">Meizhou</option>
+								<option value="18024448">Shanwei</option>
+								<option value="18024704">Dongguan</option>
+								<option value="18024960">Zhongshan</option>
+								<option value="18025216">Jiangmen</option>
+								<option value="18025472">Foshan</option>
+								<option value="18025728">Yangjiang</option>
+								<option value="18025984">Zhanjiang</option>
+								<option value="18026240">Maoming</option>
+								<option value="18026496">Zhaoqing</option>
+								<option value="18026752">Qingyuan</option>
+								<option value="18027008">Chaozhou</option>
+								<option value="18027264">Jieyang</option>
+								<option value="18027520">Yunfu</option>
+								<option value="18027776">Huizhou</option>
+								<option value="18087936">Guangxi</option>
+								<option value="18088192">Nanning</option>
+								<option value="18088448">Liuzhou</option>
+								<option value="18088704">Guilin</option>
+								<option value="18088960">Wuzhou</option>
+								<option value="18089216">Beihai</option>
+								<option value="18089472">Fangchenggang</option>
+								<option value="18089728">Qinzhou</option>
+								<option value="18089984">Guigang</option>
+								<option value="18090240">Yulin</option>
+								<option value="18090496">Baise</option>
+								<option value="18090752">Hezhou</option>
+								<option value="18091008">Hechi</option>
+								<option value="18091264">Laibin</option>
+								<option value="18091520">Chongzuo</option>
+								<option value="18153472">Hainan</option>
+								<option value="18153728">Haikou</option>
+								<option value="18153984">Sanya</option>
+								<option value="18154496">Wenchang</option>
+								<option value="18154752">Qionghai</option>
+								<option value="18155008">Wanning</option>
+								<option value="18155264">Wuzhishan</option>
+								<option value="18155520">Dongfang</option>
+								<option value="18155776">Danzhou</option>
+								<option value="18156032">Lingao</option>
+								<option value="18156288">Chengmai</option>
+								<option value="18156544">Ding'an</option>
+								<option value="18156800">Tunchang</option>
+								<option value="18157056">Changjiang Li Autonomous County</option>
+								<option value="18157312">Baisha Li Autonomous County</option>
+								<option value="18157568">Qiongzhong Li and Miao Autonomous County</option>
+								<option value="18157824">Lingshui Li Autonomous County</option>
+								<option value="18158080">Baoting Li and Miao Autonomous County</option>
+								<option value="18158336">Ledong Li Autonomous County</option>
+								<option value="18158592">Sansha</option>
+								<option value="18158848">Yang Pu</option>
+								<option value="18219008">Chongqing</option>
+								<option value="18284544">Sichuan</option>
+								<option value="18284800">Chengdu</option>
+								<option value="18285056">Zigong</option>
+								<option value="18285312">Panzhihua</option>
+								<option value="18285568">Luzhou</option>
+								<option value="18285824">Deyang</option>
+								<option value="18286080">Mianyang</option>
+								<option value="18286336">Guangyuan</option>
+								<option value="18286592">Suining</option>
+								<option value="18286848">Neijiang</option>
+								<option value="18287104">Leshan</option>
+								<option value="18287360">Nanchong</option>
+								<option value="18287616">Yibin</option>
+								<option value="18287872">Guang'an</option>
+								<option value="18288128">Dazhou</option>
+								<option value="18288384">Meishan</option>
+								<option value="18288640">Ya'an</option>
+								<option value="18288896">Bazhong</option>
+								<option value="18289152">Ziyang</option>
+								<option value="18289408">Ngawa Tibetan and Qiang Autonomous Prefecture</option>
+								<option value="18289664">Garzê Tibetan Autonomous Prefecture</option>
+								<option value="18289920">Liangshan Yi Autonomous Prefecture</option>
+								<option value="18350080">Guizhou</option>
+								<option value="18350336">Guiyang</option>
+								<option value="18350592">Liupanshui</option>
+								<option value="18350848">Zunyi</option>
+								<option value="18351104">Anshun</option>
+								<option value="18351360">Tongren</option>
+								<option value="18351616">Bijie</option>
+								<option value="18351872">Qianxinan Buyei and Miao Autonomous Prefecture</option>
+								<option value="18352128">Qiandongnan Miao and Dong Autonomous Prefecture</option>
+								<option value="18352384">Qiannan Buyei and Miao Autonomous Prefecture</option>
+								<option value="18415616">Yunnan</option>
+								<option value="18415872">Kunming</option>
+								<option value="18416128">Qujing</option>
+								<option value="18416384">Yuxi</option>
+								<option value="18416640">Baoshan</option>
+								<option value="18416896">Zhaotong</option>
+								<option value="18417152">Pu'er City</option>
+								<option value="18417408">Lincang</option>
+								<option value="18417664">Lijiang</option>
+								<option value="18417920">Wenshan City</option>
+								<option value="18418176">Honghe Hani and Yi Autonomous Prefecture</option>
+								<option value="18418432">Xishuangbanna Dai Autonomous Prefecture</option>
+								<option value="18418688">Chuxiong City</option>
+								<option value="18418944">Dali</option>
+								<option value="18419200">Dehong Dai and Jingpo Autonomous Prefecture</option>
+								<option value="18419456">怒江傈傈族自治州</option>
+								<option value="18419712">Diqing Tibetan Autonomous Prefecture</option>
+								<option value="18481152">Tibet</option>
+								<option value="18481408">Lhasa</option>
+								<option value="18481664">Nagqu Prefecture</option>
+								<option value="18481920">Chengguan</option>
+								<option value="18482176">Shannan</option>
+								<option value="18482432">Shigatse</option>
+								<option value="18482688">Ali</option>
+								<option value="18482944">Nyingchi</option>
+								<option value="18546688">Shaanxi</option>
+								<option value="18546944">Xi'an</option>
+								<option value="18547200">Tongchuan</option>
+								<option value="18547456">Baoji</option>
+								<option value="18547712">Xianyang</option>
+								<option value="18547968">Weinan</option>
+								<option value="18548224">Yan'an</option>
+								<option value="18548480">Hanzhong</option>
+								<option value="18548736">Yulin</option>
+								<option value="18548992">Ankang</option>
+								<option value="18549248">Shangluo</option>
+								<option value="18612224">Gansu</option>
+								<option value="18612480">Lanzhou</option>
+								<option value="18612736">Jinchang</option>
+								<option value="18612992">Baiyin</option>
+								<option value="18613248">Tianshui</option>
+								<option value="18613504">Jiayuguan City</option>
+								<option value="18613760">Wuwei</option>
+								<option value="18614016">Zhangye</option>
+								<option value="18614272">Pingliang</option>
+								<option value="18614528">Jiuquan</option>
+								<option value="18614784">Qingyang</option>
+								<option value="18615040">Dingxi</option>
+								<option value="18615296">Longnan</option>
+								<option value="18615552">Gannan Tibetan Autonomous Prefecture</option>
+								<option value="18615808">Linxia City</option>
+								<option value="18677760">Qinghai</option>
+								<option value="18678016">Xining</option>
+								<option value="18678272">Haidong</option>
+								<option value="18678528">Haibei Tibetan Autonomous Prefecture</option>
+								<option value="18678784">Hainan Tibetan Autonomous Prefecture</option>
+								<option value="18679040">Golog Tibetan Autonomous Prefecture</option>
+								<option value="18679296">Yushu Tibetan Autonomous Prefecture</option>
+								<option value="18679552">Haixi Mongol and Tibetan Autonomous Prefecture</option>
+								<option value="18679808">Huangnan Tibetan Autonomous Prefecture</option>
+								<option value="18743296">Ningxia</option>
+								<option value="18743552">Yinchuan</option>
+								<option value="18743808">Shizuishan</option>
+								<option value="18744064">Wuzhong</option>
+								<option value="18744320">Guyuan</option>
+								<option value="18744576">Zhongwei</option>
+								<option value="18808832">Xinjiang</option>
+								<option value="18809088">Ürümqi</option>
+								<option value="18809344">Karamay</option>
+								<option value="18809600">Shihezi</option>
+								<option value="18809856">Alar</option>
+								<option value="18810112">图木舒克</option>
+								<option value="18810368">Tumxuk</option>
+								<option value="18810624">Turpan</option>
+								<option value="18810880">Hami City</option>
+								<option value="18811136">Hotan</option>
+								<option value="18811392">Aksu Prefecture</option>
+								<option value="18811648">Kashgar</option>
+								<option value="18811904">Kizilsu Kirghiz Autonomous Prefecture</option>
+								<option value="18812160">Bayingolin Mongol Autonomous Prefecture</option>
+								<option value="18812416">Changji Hui Autonomous Prefecture</option>
+								<option value="18812672">Bortala Mongol Autonomous Prefecture</option>
+								<option value="18812928">Ili Kazakh Autonomous Prefecture</option>
+								<option value="18813184">Tacheng Prefecture</option>
+								<option value="18813440">Altay Prefecture</option>
+								
+							<% end %>
+							
+						</select>
+						<br/>
+						<span id="setting_geo_targeting_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_language" class="form_label pull-right">Language Targeting:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="adgroup_setting_language" name="" class="form_field">
+							<option value="sc">Simplified Chinese</option>
+						</select>
+						<br/>
+						<span id="adgroup_setting_language_error" class="error_message"></span><br/>
+
+						<div class="button white_button cancel_button pull-right" onclick="$('#adgroupSettingForm')[0].reset();">Reset</div>
+						<div class="button red_button submit_button pull-right" onclick="campaignSetting()">Update</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+
+function campaignSetting(){
+	
+	
+	
+	// var setting_network_id = $( "#setting_network_id option:selected" ).val();
+	var setting_network_id = $( "#setting_network_id" ).val();
+	var setting_campaign_id = $( "#setting_campaign_id" ).val();
+	
+	var setting_status = $( "#setting_status option:selected" ).val();
+	
+	var setting_start_date = $( "#setting_start_date" ).val();
+	var setting_end_date = $( "#setting_end_date" ).val();
+	
+	var setting_geo_targeting = $( "#setting_geo_targeting option:selected" ).val();
+	
+	
+	
+	// var url = "/campaignsetting/"+type+"/"+id+"/"+network_id
+	
+	data = "setting_network_id="+setting_network_id+"&setting_campaign_id="+setting_campaign_id+"&setting_status="+setting_status+"&setting_start_date="+setting_start_date+"&setting_end_date="+setting_end_date+"&setting_geo_targeting="+setting_geo_targeting
+	
+	var url = "/campaignsettingupdate"
+    $.ajax({
+		type: "POST",
+		url: url,
+		data: data,
+		dataType: "json",
+		// async : false,
+		success:function(data) {
+			// console.log(data);
+			if (data.status == "true"){
+				
+				
+			}else{
+			}
+			
+		},
+		error:function() {
+		}
+	});
+	
+	
+	console.log("done")
+	
+}
+
+</script>

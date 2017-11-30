@@ -1,0 +1,180 @@
+<div class="adeqo-container page-contact-us">
+	
+	
+	<%= render :partial => "header" %>
+	
+	
+	<section class="banner vertical-align-middle">
+		<h1 class="color-xs-white font-size-xs-24pt font-size-sm-30pt text-center text-uppercase">Contact us</h1>
+		<div class="scroll-container"><a href="#form" class="font-size-xs-42pt"><i class="color-xs-white fa fa-angle-down" aria-hidden="true"></i></a></div>
+	</section>
+	<section class="padding-top-xs-60 padding-bottom-xs-60" id="form">
+		<div class="container">
+			<div class="">
+				<div class="col-xs-12 col-md-5 contact-us-left-col font-size-xs-17pt">
+					<div class="alert alert-danger font-size-xs-17pt" id="msg" style="display:none"></div>
+					<form id="contact_us_form" method="post" class="form">
+						<p class="margin-bottom-xs-40">Call us at +852 2492 2770 or use below form to get in touch with us.</p>
+						<div class="contact_form_row">
+							<div class="contact_form_input">
+								<div class="form-group">
+									<input id="contact_name" name="contact_name" type="text" value="" class="form-control personal_form_text" placeholder="Name*"/>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="contact_form_row">
+							<div class="contact_form_input">
+								<div class="form-group">
+									<input id="contact_email" name="contact_email" type="text" value="" class="form-control personal_form_text" placeholder="Email*"/>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="contact_form_row">
+							<div class="contact_form_input">
+								<div class="form-group">
+									<input id="contact_subject" name="contact_subject" type="text" value="" class="form-control personal_form_text" placeholder="Subject*"/>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="contact_form_row">
+							<div class="contact_form_input">
+								<div class="form-group">
+									<textarea id="contact_message" name="contact_message" cols="40" rows="10" aria-invalid="false" class="form-control contact_form_text" placeholder="Message*"></textarea>
+								</div><br/>
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 horizontal-center">
+									<button type="button" id="submit_button" form="contact_us_form" class="btn btn-lg btn-red font-size-xs-17pt submit_button margin-bottom-xs-40">Send Your Message</button>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+				<div class="hidden-xs col-md-1"></div>
+				<div class="col-xs-12 col-md-5">
+					<div class="block-container font-size-xs-17pt">
+						<h2><span class="contact_form_title">Visit Us:</span></h2>
+						<p>Global Headquarters</p>
+						<p>19/F, Tung Chiu Commercial Centre,<br/>193-197 Lockhart Road Wanchai, Hong Kong<br/>Tel: +852 2492 2770<br/>Email: <a href="mailto:sales@bmgww.com">sales@bmgww.com</a></p>
+						<!-- <div> -->
+							<!-- <button class="btn btn-250 btn-lg btn-default black-border font-size-xs-17pt margin-bottom-xs-40" type="button" data-toggle="collapse" data-target="#collapseMap" aria-expanded="true" aria-controls="collapseMap">Get Direction</button> -->
+							<!-- <div class="collapse in" id="collapseMap">
+								<div style="height:400px; width: 100%;">
+									<div id="map"></div>
+								</div>
+							</div> -->
+						<!-- </div> -->
+					</div>
+					<div class="block-container font-size-xs-14pt">
+						<h2><span class="contact_form_title">Join Us:</span></h2>
+						<p>We're probably hiring. Let's change tomorrow.</p>
+						<p>Email us to find our more.</p>
+						<a href="mailto:sales@bmgww.com" class="btn btn-250 btn-lg btn-default black-border font-size-xs-17pt">Join Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<%= render :partial => "footer" %>
+	
+</div>
+
+<!-- Modal-->
+<%= render :partial => "modal" %>
+<!-- /Modal-->
+
+<script type="text/javascript">
+$("#submit_button").click(function(e){
+	console.log("submit_button");
+
+	var postData = $("#contact_us_form").serializeArray();
+	var formURL = "/send_contact_us_email";
+
+	$( "#msg" ).hide();
+	$( "#msg" ).empty();
+	$("#contact_us_form :input").prop("disabled", true);
+
+
+	for (i = 0; i < postData.length; i++) {
+
+		if(postData[i]["value"] == ""){
+			$( "#msg" ).append( "<p style='color:red;'>Please fill in the required field.</p>" );
+			$( "#msg" ).show();
+			$("#contact_us_form :input").prop("disabled", false);
+			return;
+		}
+
+		if(postData[i]["name"] == "contact_email"){
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(regex.test(postData[i]["value"]) == false){
+				$( "#msg" ).append( "<p style='color:red;'>Please make sure your email is in correct format.</p>" );
+				$( "#msg" ).show();
+				$("#contact_us_form :input").prop("disabled", false);
+				return;
+			}
+		}
+	}
+
+
+	$.ajax({
+		url : formURL,
+		type: "POST",
+		data : postData,
+		success:function(data, textStatus, jqXHR)
+		{
+			if(data['status'] == "true"){
+				
+				console.log("done");
+				window.location.href = "/contact_us_thank_you";
+				console.log("done");
+				
+				$( "#msg" ).append( "<p style='color:green;'>Thanks for your email, we will reply to you shortly!</p>" );
+				$( "#msg" ).show();
+				$( "#contact_us_form" )[0].reset();
+				$("#contact_us_form :input").prop("disabled", false);
+
+				$( "#msg" ).delay(2500).slideUp(850);
+			}else{
+				$( "#msg" ).append( "<p style='color:red;'>Something wrong with your data, please make sure you type in the correct format.</p>" );
+				$( "#msg" ).show();
+				$("#contact_us_form :input").prop("disabled", false);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			$( "#msg" ).append( "<p style='color:red;'>Our service is too busy, please try again in a few minutes.</p>" );
+			$( "#msg" ).show();
+			$("#contact_us_form :input").prop("disabled", false);
+		}
+	});
+	e.preventDefault();
+});
+</script>
+
+
+
+<script>
+var map;
+function initMap() {
+	var myLatLng = {lat: 22.278503, lng: 114.1743262};
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: myLatLng,
+		scrollwheel: true,
+		zoom: 17
+	});
+
+	// Create a marker and set its position.
+	var marker = new google.maps.Marker({
+		map: map,
+		position: myLatLng,
+		title: '19/F, Tung Chiu Commercial Centre, 193-197 Lockhart Road, Wanchai, Hong Kong'
+	});
+}
+</script>
+
+
+
+<script async defer src="http://maps.google.cn/maps/api/js?key=AIzaSyCkhVd8XNSwCkdhi3NfoMPDHmJqbFzO_k0&amp;callback=initMap"></script>

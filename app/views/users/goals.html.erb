@@ -1,0 +1,1135 @@
+<!-- <%= stylesheet_link_tag "css/jquery..min.css" %>
+
+<%= javascript_include_tag 'js/jquery..min.js'%> -->
+
+<div class="content_title">Account Settings</div>
+<%= render partial: "account_tab_menu.html.erb" %>
+
+<div class="content_outer">
+	
+	<input id="company_id" type="hidden" value="<%=@user_company_id%>">
+	
+	<div id="goal_tab" class="content_core tab-pane in active">
+      <div class="goal-top-btn">
+        <!-- <div class="button red_button submit_button"> -->
+          <button id="new_goal" class="new_goal button red_button submit_button" href="#new_goal_tab" data-toggle="tab">New Goal</button>
+        <!-- </div> -->
+      </div>
+      <div class="goal-top-btn">
+        <div id="delete_goal" class="button grey_button submit_button disabledTab">Delete</div>
+      </div>
+    <div class="goal_table">
+      <table id="goals" class="table table-condensed tab-pane">
+        <thead>
+          <tr>
+            <th class="text-left">
+              <div class="checkbox-goal">
+                <label class="goal">
+                  <input id="select_all" type="checkbox" disabled> Goal
+                </label>
+              </div>
+            </th>
+            <th>Id</th>
+            <th>Goal Type</th>
+            <th>Past 7 days conversions</th>
+            <th>Recording</th>
+          </tr>
+        </thead>
+        <tbody class="text-right">
+          
+          
+          <% @goals.each do |goal| %>
+          
+          <tr role="row" class="odd">
+	            <td>
+	              <div class="text-left checkbox">
+	                <label><input id="contact_us" type="checkbox" name="<%=goal['name']%>" value="<%=goal['_id']%>" disabled><%=goal['name']%></label>
+	              </div>
+	            </td>
+	            <td>
+	              <div class="text-left goal_text"><%=goal['goal_id']%></div>
+	            </td>
+	            <td>
+	              <div class="text-left goal_text"><%=goal['type']%></div>
+	            </td>
+	            <td>
+	              <div class="text-left goal_text">N/A</div>
+	            </td>
+	            <td>
+	              <div class="onoffswitch">
+	              	<% if goal['status'].to_i == 1 %>
+	                	<input type="checkbox" name="onoffswitch" value="<%=goal['goal_id']%>" class="onoffswitch-checkbox goal_switch" id="" checked>
+	                <% else %>
+	                	<input type="checkbox" name="onoffswitch" value="<%=goal['goal_id']%>" class="onoffswitch-checkbox goal_switch" id="">
+	                <% end%>
+	                <label class="onoffswitch-label" for="contact_switch">
+		                <span class="onoffswitch-inner"></span>
+		                <span class="onoffswitch-switch"></span>
+	                </label>
+	              </div>
+	            </td>
+	      </tr>
+          
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+	</div>
+  <div id="new_goal_tab" class="tab-pane fade">
+    <div class="content_core pull-left right_border">
+      <nav class="nav-tabs">
+        <div class="content_core_big_title content_item">
+					<a id="goal_step1_tab" class="tracking_tab goal_setup" href="#goal_step1" data-toggle="tab">01 Goal Setup</a>
+				</div>
+        <div class="content_core_big_title content_item">
+					<a id="goal_step2_tab" class="tracking_tab goal_setup disabledTab" href="#goal_step2" data-toggle="tab">02 Goal Description</a>
+				</div>
+        <div class="content_core_big_title content_item">
+					<a id="goal_step3_tab" class="tracking_tab goal_setup disabledTab" href="#goal_step3" data-toggle="tab">03 Goal Details</a>
+				</div>
+      </nav>
+    </div>
+    <div class="content_core pull-left left_border">
+      <div id="goal_step1" class="tab-content tab-pane goal_step">
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step1" type="checkbox" value="place an order" name="chk_step1[]"> Place an order
+          </label>
+        </div>
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step1" type="checkbox" value="contact us" name="chk_step1[]"> Contact us
+          </label>
+        </div>
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step1" type="checkbox" value="custom" name="chk_step1[]"> Custom
+          </label>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <!-- <div class="button grey_button submit_button step1_button continue_button"> -->
+							<button id="step1_continue" class="goal_button button grey_button submit_button step1_button continue_button" href="#goal_step2_tab" data-toggle="tab">Continue</button>
+						<!-- </div> -->
+          </div>
+          <div class="goal_button_container col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a  class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="goal_step2" class="tab-content tab-pane goal_step disabled">
+        <div class="content_core_big_title content_item">Goal Name</div>
+        <label class="text">
+          <input type="text" id="goal_name" class="step_text">
+        </label>
+        <div class="content_core_big_title content_item">Type</div>
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step2" type="checkbox" name="chk_step2[]" value="destination"> Destination
+          </label>
+        </div>
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step2" type="checkbox"  name="chk_step2[]" value="duration"> Duration
+          </label>
+        </div>
+        <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step2" type="checkbox"  name="chk_step2[]" value="page"> Pages/Screens per session
+          </label>
+        </div>
+        <!-- <div class="checkbox-goal-step">
+          <label class="goal">
+            <input class="chk_step chk_step2" type="checkbox" name="chk_step2[]" value="event"> Event 
+          </label>
+        </div> -->
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <!-- <div class="button grey_button submit_button step2_button continue_button"> -->
+							<button id="step2_continue" class="goal_button button grey_button submit_button step2_button continue_button" href="#goal_step3_tab" data-toggle="tab">Continue</button>
+						<!-- </div> -->
+          </div>
+          <div class="goal_button_container col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a  class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="goal_step3_destination" class="tab-content tab-pane goal_step disabled">
+        <div class="content_core_big_title content_item">Destinations</div>
+        <div class="content_item_goal">
+          <select class="goal_dropdown" id="destination_select" name="select">
+            <option value="Equals to">Equals to</option>
+            <option value="Begins with">Begins with</option>
+            <option value="Regular expression">Regular expression</option>
+          </select>
+        </div>
+        <div class="content_item_goal">
+          <input id="url" class="goal_text_input step_text" type="url" placeholder="add screen name or web page URL"><span class="errmsg" id="url_errmsg"></span>
+        </div>
+        <div class="content_core_big_title content_item">Value</div>
+				<div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contact_switch_value">
+              <label class="onoffswitch-label" for="contact_switch_value">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+					</div>
+				  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <input id="contact_value" class="step3_text_input step_text step_text_value disabled" type="number" min="" max=""><span class="errmsg" id="dest_val_errmsg"></span>
+				  </div>
+				</div>
+        <div class="content_item_goal content_core_title">
+			    Assign a monetary value to the conversion.
+		    </div>
+        <!-- <div class="content_core_big_title content_item">Funnel</div>
+				<div class="row">
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contact_switch_funnel">
+            <label class="onoffswitch-label" for="contact_switch_funnel">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </div>
+					<div id="contact_funnel" class="content_item disabled">
+            <div class="row">
+							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+								Step
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								Name
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								Screen/Page
+							</div>
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+								Required?
+							</div>
+						</div>
+					</div>
+					  <input id="contact_funnel" class="step3_text_input step_text disabled" type="text">
+				</div>
+        <div class="content_item_goal content_core_title">
+  			  Specify a path you expect traffic to take towards the destination. Use it to analyze an entrance and exit points that impact your Goal.
+  		  </div> -->
+        <hr/>
+        <div class="row">
+          <div class="goal_underline content_item_goal col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            VERIFY THIS GOAL
+          </div>
+          <div class="content_item_goal col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            See how often this Goal would have converted based on your data from the past 7 days.
+          </div>
+        </div>
+        <hr/>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <button id="submit-btn-destination" class="button red_button submit_button goal_button">Save</button>
+          </div>
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <a  class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="errmsg"></span></div>
+        </div>
+      </div>
+      <div id="goal_step3_duration" class="tab-content tab-pane goal_step disabled">
+        <div class="content_core_big_title content_item">Durations</div>
+        <div class="content_core_title">Greater than</div>
+        <div class="content_item_goal">
+					<div class="row">
+					<!-- <div class="form-control-wrapper">
+						<input type="text" id="duration_time" class="form-control floating-label goal_text_input step_text time_input" placeholder="Time">
+					</div> -->
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="duration_time_hour" class="time_input step_text" type="number" min="00" max="23" placeholder="hour">
+					  </div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="duration_time_minute" class="time_input step_text" type="number" min="00" max="59" placeholder="minute">
+					  </div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="duration_time_second" class="time_input step_text" type="number" min="00" max="59" placeholder="second">
+					  </div>
+					</div>
+					<div>
+						<span class="errmsg" id="dura_timer-hr_errmsg"></span><br/>
+						<span class="errmsg" id="dura_timer-min_errmsg"></span><br/>
+						<span class="errmsg" id="dura_timer-sec_errmsg"></span><br/>
+					</div>
+        </div>
+        <div class="content_core_big_title content_item">Value</div>
+				<div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contact_switch_duration">
+              <label class="onoffswitch-label" for="contact_switch_duration">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<!-- <div class="form-control-wrapper">
+							<input type="text" id="contact_duration" class="step3_text_input step_text step_text_value disabled" placeholder="Date"><span class="errmsg" id="dura_val_errmsg"></span>
+						</div> -->
+					  <input id="contact_duration" class="step3_text_input step_text step_text_value disabled" type="number" min="" max=""><span class="errmsg" id="dura_val_errmsg"></span>
+				  </div>
+				</div>
+        <div class="content_item_goal content_core_title">
+			    Assign a monetary value to the conversion.
+		    </div>
+          <hr/>
+        <div class="row">
+          <div class="goal_underline content_item_goal col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            VERIFY THIS GOAL
+          </div>
+          <div class="content_item_goal col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            See how often this Goal would have converted based on your data from the past 7 days.
+          </div>
+        </div>
+        <hr/>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <button id="submit-btn-duration" class="button red_button submit_button goal_button">Save</button>
+          </div>
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <a class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="errmsg"></span></div>
+        </div>
+      </div>
+      <div id="goal_step3_page" class="tab-content tab-pane goal_step disabled">
+        <div class="content_core_big_title content_item">Pages/Screens per session</div>
+        <div class="content_core_title">Greater than</div>
+        <div class="content_item_goal">
+          <!-- <label class="">
+            <input id="session_time" class=" goal_text_input step_text" type="text">
+          </label> -->
+					<div class="row">
+					<!-- <div class="form-control-wrapper">
+						<input type="text" id="duration_time" class="form-control floating-label goal_text_input step_text time_input" placeholder="Time">
+					</div> -->
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="page_time_hour" class="time_input step_text" type="number" min="00" max="23" placeholder="hours">
+					  </div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="page_time_minute" class="time_input step_text" type="number" min="00" max="59" placeholder="minutes">
+					  </div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <input id="page_time_second" class="time_input step_text" type="number" min="00" max="59" placeholder="seconds">
+					  </div>
+					</div>
+					<div>
+						<span class="errmsg" id="page_timer-hr_errmsg"></span><br/>
+						<span class="errmsg" id="page_timer-min_errmsg"></span><br/>
+						<span class="errmsg" id="page_timer-sec_errmsg"></span><br/>
+					</div>
+        </div>
+        <div class="content_core_big_title content_item">Value</div>
+				<div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contact_switch_page">
+              <label class="onoffswitch-label" for="contact_switch_page">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					  <input id="contact_page" class="step3_text_input step_text step_text_value disabled" type="number" min="" max=""><span class="errmsg" id="page_val_errmsg"></span>
+				  </div>
+				</div>
+          <div class="content_item_goal content_core_title">
+			      Assign a monetary value to the conversion.
+		      </div>
+          <hr/>
+        <div class="row">
+          <div class="goal_underline content_item_goal col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            VERIFY THIS GOAL
+          </div>
+          <div class="content_item_goal col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            See how often this Goal would have converted based on your data from the past 7 days.
+          </div>
+        </div>
+        <hr/>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <button id="submit-btn-page" class="button red_button submit_button goal_button">Save</button>
+          </div>
+          <div class="goal_button_container col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <a  class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="errmsg"></span></div>
+        </div>
+      </div>
+      <div id="goal_step3_event" class="tab-content tab-pane goal_step disabled">
+        <div class="content_core_big_title content_item">Event Conditions</div>
+        <div class="content_item_goal content_core_title">
+          See one or more conditions. A conversion will be counted if all of the conditions you set are true when an Event is triggered.
+        </div>
+        <div class="content_core_big_title content_item">Category</div>
+        <div class="content_item_goal">
+          <select class="goal_dropdown" id="category_select" name="select">
+            <option value="Equals to">Equals to</option>
+            <option value="Begins with">Begins with</option>
+            <option value="Regular expression">Regular expression</option>
+          </select>
+        </div>
+        <div class="content_item_goal">
+					<input id="category" class="goal_text_input step_text" type="text" placeholder="Category">
+					<span class="errmsg" id="event_Category_errmsg"></span>
+        </div>
+        <div class="content_core_big_title content_item">Action</div>
+        <div class="content_item_goal">
+          <select class="goal_dropdown" id="action_select" name="select">
+            <option value="Equals to">Equals to</option>
+            <option value="Begins with">Begins with</option>
+            <option value="Regular expression">Regular expression</option>
+          </select>
+        </div>
+        <div class="content_item_goal">
+          <input id="action" class="goal_text_input step_text" type="text" placeholder="Action">
+					<span class="errmsg" id="event_Action_errmsg"></span>
+        </div>
+        <div class="content_core_big_title content_item">Label</div>
+        <div class="content_item_goal">
+          <select class="goal_dropdown" id="label_select" name="select">
+            <option value="Equals to">Equals to</option>
+            <option value="Begins with">Begins with</option>
+            <option value="Regular expression">Regular expression</option>
+          </select>
+        </div>
+        <div class="content_item_goal">
+            <input id="label" class="goal_text_input step_text" type="text" placeholder="Label">
+        </div>
+        <div class="content_core_big_title content_item">Value</div>
+        <div class="content_item_goal">
+          <select class="goal_dropdown" id="value_select" name="select">
+            <option value="Greater than">Greater than</option>
+            <option value="Equals to">Equals to</option>
+            <option value="Less than">Less than</option>
+          </select>
+        </div>
+        <div class="content_item_goal">
+            <input id="value" class="goal_text_input step_text step_text_value" type="number" min="" max="" placeholder="Value">
+        </div>
+        <div class="content_core_big_title content_item">Use the Event Value as the Global Value for the conversion</div>
+        <div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				    <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contact_switch_event">
+              <label class="onoffswitch-label" for="contact_switch_event">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <input id="contact_event" class="step3_text_input step_text step_text_value" type="number" min="" max=""><span class="errmsg" id="global_val_errmsg"></span>
+				  </div>
+				</div>
+        <div class="content_item_goal content_core_title">
+			    If you don't have a value defined in the condition above that matchs your Event tracking code, nothing will appear as the Global Value.
+		    </div>
+        <hr/>
+        <div class="row">
+          <div class="goal_underline content_item_goal col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            VERIFY THIS GOAL
+          </div>
+          <div class="content_item_goal col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            See how often this Goal would have converted based on your data from the past 7 days.
+          </div>
+        </div>
+        <hr/>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="goal_button_container col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <button id="submit-btn-event" class="button red_button submit_button goal_button">Save</button>
+          </div>
+          <div class="goal_button_container col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <a  class="goal_button goal_cancel" href="#goal_tab" data-toggle="tab">
+              <div class="button cancel_button submit_button">Cancel</div>
+            </a>
+          </div>
+					<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="errmsg"></span></div> -->
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+
+<!-- delete_goal_modal -->
+<div class="modal fade" id="delete_goal_modal" tabindex="-1" role="dialog" aria-labelledby="delete_goal_modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<div class="modal_title user_remove_title">Are you sure you want to delete the goal?</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div id="delete_submit" class="button red_button submit_button pull-right" onclick="$('#delete_goal_modal').modal('hide');">Submit</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="button white_button cancel_button pull-left" onclick="$('#delete_goal_modal').modal('hide');">Cancel</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- success_modal -->
+<div class="modal fade" id="succeed_modal" tabindex="-1" role="dialog" aria-labelledby="succeed_goal_modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<div class="modal_title user_remove_title">Succeed</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+							<div class="button white_button cancel_button" onclick="$('#succeed_modal').modal('hide');" style="margin: 0 auto;">Close</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- failed_modal -->
+<div class="modal fade" id="failed_modal" tabindex="-1" role="dialog" aria-labelledby="failed_goal_modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<div class="modal_title user_remove_title msg_replace">Failed</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="button white_button cancel_button" onclick="$('#failed_modal').modal('hide');" style="margin: 0 auto;">Close</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+
+$( window ).load(function() {
+  $("input:checkbox").removeAttr("disabled");
+});
+// Goal Page
+$(document).ready(function(){
+
+  // select all
+  $("#select_all").click(function(){
+    if ($("#select_all").prop("checked") == true) {
+      $("input[name='goal']").each(function(){
+        $(this).prop("checked", true);
+				$("#delete_goal").removeClass("disabledTab");
+      });
+    }else {
+      $("input[name='goal']").each(function(){
+        $(this).prop("checked", false);
+				$("#delete_goal").addClass("disabledTab");
+      });
+    }
+  });
+
+  // delete_goal
+	var goal_id = [];
+
+	$(':checkbox[name=goal], :checkbox[id=select_all]').on("change",function(){
+				goal_id = $(':checkbox[name=goal]:checked').map(function() {
+						return this.value;
+				})
+				.get();
+				if ($(':checkbox[name=goal]').is(":checked")) {
+			  	$("#delete_goal").removeClass("disabledTab grey_button").addClass("red_button");
+			  }else {
+			  	$("#delete_goal").addClass("disabledTab grey_button").removeClass("red_button");
+			  }
+	// console.log(goal_id);
+	});
+	$(':checkbox[name=goal]').on("change",function(){
+		if($(':checkbox[id=select_all]').is(":checked")){
+			$(':checkbox[id=select_all]').prop('checked', false);
+		}
+	});
+
+  $('#delete_goal').on('click', function(){
+		$('#delete_goal_modal').modal('show');
+	});
+
+	$('#delete_submit').on('click', function(){
+		$(".loading_container").show();
+		$.ajax({
+			url: '/deletetrackgoal',
+			type: "POST",
+			dataType: "json",
+			data: {"goal_ids": goal_id},
+			//data: JSON.stringify({"goal_id": goal_id}),
+			success: function(data, status, xhr){
+				$(".loading_container").hide();
+				goal_id = [];
+				$('#succeed_modal').modal('show');
+				// window.location.reload();
+			},
+			error: function(xhr, ajaxOptions, thrownError){
+				$(".loading_container").hide();
+				$('#failed_modal').modal('show');
+			},
+		});
+	});
+
+	// goals record start
+	var goal_record_id = "";
+	var goal_switch_status = "";
+	
+  $('.onoffswitch-switch').click(function(){
+  	
+  	console.log("edit");
+	var currElement = $(this);
+	var currElement_parent = currElement.parent().parent();
+	var currElement_parent_first_child = currElement_parent.children(":first").toggleClass("goal_switch");
+	
+	goal_record_id = currElement_parent_first_child.val();
+	
+	
+    if ($(this).prop("checked")) {
+		goal_switch_status = 0;
+    }else {
+    	goal_switch_status = 1;
+    }
+		
+	$(".loading_container").show();
+	
+    $.ajax({
+      url: '/edittrackgoal',
+      type: "POST",
+      dataType: "json",
+      data: {
+        "goal_record_id": goal_record_id,
+		"goal_switch_status": goal_switch_status
+      },
+      success: function(msg){
+				$(".loading_container").hide();
+      },
+      error: function(xhr, ajaxOptions, thrownError){
+				$(".loading_container").hide();
+				$('#failed_modal').modal('show');
+				$('#failed_modal .msg_replace').html("There are some error. Please try again later");
+				currElement.prop("checked", !currElement.prop("checked"));
+      },
+			timeout: 5000
+    });
+  })
+	// goals record end
+});
+
+
+// Goal Step
+$(document).ready(function(){
+
+	// checkbox auto un-tick
+	$('input[name="chk_step1[]"]').on('change', function(){
+		$('input[name="chk_step1[]"]').not(this).prop("checked", false);
+	});
+	$('input[name="chk_step2[]"]').on('change', function(){
+		$('input[name="chk_step2[]"]').not(this).prop("checked", false);
+	});
+
+	var chkArray = "";
+	$(".chk_step2").click(function() {
+		chkArray = $(this).val();
+	});
+
+
+  // left menu start
+  $("#goal_step1_tab").click(function(){
+    $(".tracking_tab").removeClass("bold");
+    $(".goal_step").hide();
+    $("#goal_step1_tab").addClass("bold");
+    $("#goal_step1").show().removeClass("disabled");
+  });
+  $("#goal_step2_tab").click(function(){
+    $(".tracking_tab").removeClass("bold");
+    $(".goal_step").hide();
+    $("#goal_step2_tab").addClass("bold");
+    $("#goal_step2").show().removeClass("disabled");
+  });
+  $("#goal_step3_tab").click(function(){
+    $(".tracking_tab").removeClass("bold");
+    $(".goal_step").hide();
+    if (chkArray == "destination") {
+      $("#goal_step3_destination").show().removeClass("disabled");
+      $("#goal_step3_tab").addClass("bold");
+    }else if (chkArray == "duration") {
+      $("#goal_step3_duration").show().removeClass("disabled");
+      $("#goal_step3_tab").addClass("bold");
+    }else if (chkArray == "page") {
+      $("#goal_step3_page").show().removeClass("disabled");
+      $("#goal_step3_tab").addClass("bold");
+    }else if (chkArray == "event") {
+      $("#goal_step3_event").show().removeClass("disabled");
+      $("#goal_step3_tab").addClass("bold");
+    }
+  });
+  // left menu end
+
+  // new goal to step1
+  $("#new_goal").click(function(){
+    $("#goal_step1").show();
+    $("#goal_tab").hide();
+    $("#goal_step1_tab").addClass("bold");
+  });
+
+	// step1 to step2
+	$('input[name="chk_step1[]"]').on('change', function(){
+			if ($('input[name="chk_step1[]"]').is(":checked")) {
+				$(".step1_button").removeClass("grey_button").addClass("red_button");
+		}else {
+			$(".step1_button").removeClass("red_button").addClass("grey_button");
+		}
+	})
+  $("#step1_continue").click(function(){
+			$("#goal_step2").show().removeClass("disabled");
+			$("#goal_step1").hide();
+			$("#goal_step2_tab").addClass("bold").removeClass("disabledTab");
+			$("#goal_step1_tab").removeClass("bold");
+  });
+
+	// step2 to step3
+	var filled = false;
+	$('input[name="chk_step2[]"]').on('change', function(){
+			if ($('input[name="chk_step2[]"]').is(":checked")&& $("#goal_name").val() != '') {
+				$(".step2_button").addClass("red_button").removeClass("grey_button");
+		}else {
+			$(".step2_button").removeClass("red_button").addClass("grey_button");
+		}
+	})
+	$("#goal_name").on('keypress', function(){
+		if ($("#goal_name").val() != '' && $('input[name="chk_step2[]"]').is(":checked")) {
+			$(".step2_button").addClass("red_button").removeClass("grey_button");
+	}else {
+		$(".step2_button").removeClass("red_button").addClass("grey_button");
+	}
+	})
+
+  $("#step2_continue").click(function(){
+		if (chkArray == "destination") {
+			$("#goal_step3_destination").show().removeClass("disabled");
+			$("#goal_step2").hide();
+			$("#goal_step3_tab").addClass("bold").removeClass("disabledTab");;
+			$("#goal_step2_tab").removeClass("bold");
+		}else if (chkArray == "duration") {
+			$("#goal_step3_duration").show().removeClass("disabled");
+			$("#goal_step2").hide();
+			$("#goal_step3_tab").addClass("bold").removeClass("disabledTab");;
+			$("#goal_step2_tab").removeClass("bold");
+		}else if (chkArray == "page") {
+			$("#goal_step3_page").show().removeClass("disabled");
+			$("#goal_step2").hide();
+			$("#goal_step3_tab").addClass("bold").removeClass("disabledTab");;
+			$("#goal_step2_tab").removeClass("bold");
+		}else if (chkArray == "event") {
+			$("#goal_step3_event").show().removeClass("disabled");
+			$("#goal_step2").hide();
+			$("#goal_step3_tab").addClass("bold").removeClass("disabledTab");;
+			$("#goal_step2_tab").removeClass("bold");
+		}
+  });
+
+	// cancel button
+  $(".goal_cancel").click(function(){
+    $(".goal_step").hide().addClass("disabled");
+    $(".goal_setup").removeClass("bold").addClass("disabledTab");
+    $("#goal_tab").show().addClass("fade");
+		$(".chk_step").prop("checked", false);
+		$(".step_text").val("");
+		$(".goal_dropdown option:first").prop('selected',true);
+		$(".continue_button").removeClass("red_button").addClass("grey_button");
+		$(".goal_switch").prop("checked", false);
+		$(".step_text_value").addClass("disabled");
+  });
+
+
+// 	$('.timepicker').timepicker({
+//     timeFormat: 'HH:mm:ss',
+//     // interval: 60,
+//     minTime: '00:00:00',
+//     maxTime: '23:59:59',
+//     defaultTime: '00:00:00',
+//     startTime: '00:00:00',
+//     dynamic: true,
+//     dropdown: true,
+//     scrollbar: true
+// });
+
+	// switch input
+	$("#contact_switch_value").click(function(){
+		if ($("#contact_switch_value").prop("checked")) {
+			$("#contact_value").removeClass("disabled");
+		}else {
+			$("#contact_value").addClass("disabled");
+			$("#contact_value").val("");
+		}
+	});
+	// $("#contact_switch_funnel").click(function(){
+	// 	if ($("#contact_switch_funnel").prop("checked")) {
+	// 		$("#contact_funnel").removeClass("disabled");
+	// 	}else {
+	// 		$("#contact_funnel").addClass("disabled");
+	// 	}
+	// });
+	$("#contact_switch_duration").click(function(){
+		if ($("#contact_switch_duration").prop("checked")) {
+			$("#contact_duration").removeClass("disabled");
+		}else {
+			$("#contact_duration").addClass("disabled");
+			$("#contact_duration").val("");
+		}
+	});
+	$("#contact_switch_page").click(function(){
+		if ($("#contact_switch_page").prop("checked")) {
+			$("#contact_page").removeClass("disabled");
+		}else {
+			$("#contact_page").addClass("disabled");
+			$("#contact_page").val("");
+		}
+	});
+	$("#contact_switch_event").click(function(){
+		if ($("#contact_switch_event").prop("checked")) {
+			$("#contact_event").addClass("disabled");
+		}else {
+			$("#contact_event").removeClass("disabled");
+			$("#contact_event").val("");
+		}
+	});
+});
+
+// submit data
+function submitGoalData(){
+
+  var goal_setup = "";
+	goal_setup = $('input[name^="chk_step1"]:checked').val();
+	// console.log(goal_setup1);
+	    /*if ($('input[name="chk_step1[]"]').prop("checked")) {
+	    	goal_setup = $(this).val();
+	    }*/
+	var goal_name = $("#goal_name").val();
+	var goal_type = $('input[name^="chk_step2"]:checked').val();
+	// console.log(goal_setup2);
+	    // if ($('input[name="chk_step2[]"]').prop("checked")) {
+			// 	console.log($(this));
+	    // 	goal_type = $('input[name="chk_step2[]"]').val();
+	    // }
+  var destination_option = $('#destination_select').val();
+  var destination_url = $('#url').val();
+  var destination_value = $('#contact_value').val();
+  // var destination_funnel = $('#contact_funnel').val();
+
+	var duration_hour = $('#duration_time_hour').val();
+	var duration_minute = $('#duration_time_minute').val();
+	var duration_second = $('#duration_time_second').val();
+  var duration_time = {
+		"Hours": duration_hour,
+		"Minutes": duration_minute,
+		"Seconds": duration_second
+	};
+	// var duration_time = parseInt((duration_hour * 3600)) + parseInt((duration_minute * 60)) + parseInt(duration_second);
+  var duration_value = $('#contact_duration').val();
+
+	var page_hour = $('#page_time_hour').val();
+	var page_minute = $('#page_time_minute').val();
+	var page_second = $('#page_time_second').val();
+  var page_time = {
+		"Hours": page_hour,
+		"Minutes": page_minute,
+		"Seconds": page_second
+	};
+	// var page_time = parseInt((page_hour * 3600)) + parseInt((page_minute * 60)) + parseInt(page_second);
+  var page_value = $('#contact_page').val();
+
+  var category_option = $('#category_select').val();
+  var category = $('#category').val();
+  var action_option = $('#action_select').val();
+  var action = $('#action').val();
+  var label_option = $('#label_select').val();
+  var label = $('#label').val();
+  var value_option = $('#value_select').val();
+  var value = $('#value').val();
+  var global_value = "";
+	    if ($("#contact_event").hasClass("disabled")) {
+	    	global_value = $('#value').val();
+	    }else {
+	    	global_value = $('#contact_event').val();
+	    }
+
+  var dataDestination = {"Destination": {
+		"Destination option": destination_option,
+		"URL": destination_url,
+		"Value": destination_value
+	}};
+	var dataDuration = {"Duration": {
+		"Durtion time": duration_time,
+		"Value": duration_value
+	}};
+	var dataPages = {"Pages": {
+		"Pages/Session time": page_time,
+		"Pages/Session value": page_value
+	}};
+	var dataEvents = {"Events": {
+		"Category option": category_option,
+		"Category": category,
+		"Action option": action_option,
+		"Action": action,
+		"Label option": label_option,
+		"Label": label,
+		"Value option": value_option,
+		"Value": value,
+		"Global value": global_value
+	}};
+
+	var step3Data = '';
+
+
+  var company_id = $('#company_id').val();
+
+  var post_data = ""
+  post_data += "step1_type="+goal_setup
+  post_data += "&goal_name="+goal_name
+  post_data += "&goal_type="+goal_type
+
+  switch (goal_type) {
+  	case "destination":
+  		step3Data = dataDestination;
+  		destination_option = destination_option.toLowerCase();
+  		
+  		if(destination_option.indexOf("equals") !== -1){
+  			destination_option = "equal";
+  		}else if(destination_option.indexOf("begins") !== -1){
+  			destination_option = "begin";
+  		}else if(destination_option.indexOf("regular") !== -1){
+  			destination_option = "re";
+  		}
+  		
+  		post_data += "&destination_option="+destination_option
+	    post_data += "&destination_url="+destination_url
+	    post_data += "&destination_value="+destination_value
+
+	break;
+	case "duration":
+  		step3Data = dataDuration;
+  		post_data += "&duration_time_hour="+duration_time_hour
+	    post_data += "&duration_time_minute="+duration_time_minute
+	    post_data += "&duration_time_second="+duration_time_second
+
+	    post_data += "&duration_value="+duration_value
+  	break;
+	case "page":
+		step3Data = dataPages;
+		post_data += "&page_hour="+page_hour
+	    post_data += "&page_minute="+page_minute
+	    post_data += "&page_second="+page_second
+
+	    post_data += "&page_value="+page_value
+		break;
+	case "event":
+
+		post_data += "&event_category_option="+category_option
+        post_data += "&event_category_value="+category
+        post_data += "&event_action_option="+action_option
+        post_data += "&event_action_value="+action
+        post_data += "&event_label_option="+label_option
+        post_data += "&event_label_value="+label
+        post_data += "&event_value_option="+value_option
+        post_data += "&event_value_value="+value
+        post_data += "&event_global_value="+global_value
+		step3Data = dataEvents;
+	break;
+  }
+
+  post_data += "&company_id="+company_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // console.log(post_data);
+  // return;
+
+$(".loading_container").show();
+
+  ajax_data = JSON.stringify({
+				"Step1_type": goal_setup,
+				"Step2": {
+					"Goal_name": goal_name,
+					"Goal type": goal_type
+				},
+				"Step3": step3Data})
+
+		// console.log(ajax_data);
+
+  $.ajax({
+    url: '/addtrackgoal',
+    type: "POST",
+    dataType: "json",
+    // data: ajax_data,
+    data: post_data,
+    
+    success: function(data, status, xhr){
+			$(".loading_container").hide();
+			$('#succeed_modal').modal('show');
+			$(".chk_step").prop("checked", false);
+			$(".step_text").val("");
+			$(".goal_setup").removeClass("bold").addClass("disabledTab");
+			$(".goal_dropdown option:first").prop('selected',true);
+			$(".continue_button").removeClass("red_button").addClass("grey_button");
+			$(".goal_switch").prop("checked", false);
+			$(".step_text_value").addClass("disabled");
+			window.location.reload();
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+			$(".loading_container").hide();
+			$('#failed_modal').modal('show');
+			$('#failed_modal .msg_replace').html("Your Goal can't be created");
+
+    }
+  });
+}
+
+$(document).ready(function(){
+	$("#submit-btn-destination").click(function(){
+		var step_ok = true;
+		if ($("#url").val() == '') {
+			$("#url_errmsg").html("URL can not be empty").show().fadeOut(5000);
+			step_ok = false;
+		}
+		if (!$("#contact_value").hasClass("disabled")) {
+			if ($("#contact_value").val() == '') {
+				$("#dest_val_errmsg").html("Value can not be empty").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if(step_ok==true){
+			submitGoalData();
+		}
+	});
+	$("#submit-btn-duration").click(function(){
+		var step_ok = true;
+		if (!$("#contact_duration").hasClass("disabled")) {
+			if ($("#contact_duration").val() == '') {
+				$("#dura_val_errmsg").html("Value can not be empty").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#duration_time_hour").val()!=''){
+			if($("#duration_time_hour").val()<0){
+				$("#dura_timer-hr_errmsg").html("Please enter a number that is zero or greater.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#duration_time_minute").val()!=''){
+			if($("#duration_time_minute").val()<0 || $("#duration_time_minute").val()>60){
+				$("#dura_timer-min_errmsg").html("Minute need to between 0 to 60.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#duration_time_second").val()!=''){
+			if($("#duration_time_second").val()<0 || $("#duration_time_second").val()>60){
+				$("#dura_timer-sec_errmsg").html("Second need to between 0 to 60.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if(step_ok==true){
+			submitGoalData();
+		}
+	});
+	$("#submit-btn-page").click(function(){
+		var step_ok = true;
+		// if (!$("#contact_page").hasClass("disabled")) {
+		// 	if ($("#contact_page").val() == '') {
+		// 		$("#page_val_errmsg").html("Value can not be empty").show().fadeOut(5000);
+		// 		step_ok = false;
+		// 	}
+		// }
+		if (!$("#contact_page").hasClass("disabled")) {
+			if ($("#contact_page").val() == '') {
+				$("#page_val_errmsg").html("Value can not be empty").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#page_time_hour").val()!=''){
+			if($("#page_time_hour").val()<0){
+				$("#page_timer-hr_errmsg").html("Please enter a number that is zero or greater.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#page_time_minute").val()!=''){
+			if($("#page_time_minute").val()<0 || $("#page_time_minute").val()>60){
+				$("#page_timer-min_errmsg").html("Minute need to between 0 to 60.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if($("#page_time_second").val()!=''){
+			if($("#page_time_second").val()<0 || $("#page_time_second").val()>60){
+				$("#page_timer-sec_errmsg").html("Second need to between 0 to 60.").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if(step_ok==true){
+			submitGoalData();
+		}
+	});
+	$("#submit-btn-event").click(function(){
+		var step_ok = true;
+		if ($("#category").val() == '') {
+			console.log("adad");
+			$("#event_Category_errmsg").html("Please specify the value.").show().fadeOut(5000);
+			step_ok = false;
+		}
+		if ($("#action").val() == '') {
+			$("#event_Action_errmsg").html("Please specify the value.").show().fadeOut(5000);
+			step_ok = false;
+		}
+		if (!$("#contact_event").hasClass("disabled")) {
+			if ($("#contact_event").val() == '') {
+				$("#global_val_errmsg").html("Event value can not be empty").show().fadeOut(5000);
+				step_ok = false;
+			}
+		}
+		if(step_ok==true){
+			submitGoalData();
+		}
+	});
+});
+</script>

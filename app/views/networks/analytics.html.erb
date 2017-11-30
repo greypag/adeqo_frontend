@@ -1,0 +1,18 @@
+<%
+if @analytics_event.count.to_i
+	
+	# concat @analytics_event.count.to_i
+	
+	
+	
+	if @analytics_event.count.to_i > 0
+		@analytics_event.each do |all_event_d|
+			if all_event_d["type"] == "other_goal"
+				concat all_event_d["current_page"]
+				concat "<br />".html_safe
+			end
+		end
+	end
+	
+end
+%>

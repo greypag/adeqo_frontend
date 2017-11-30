@@ -1,0 +1,175 @@
+<div class="adeqo-container page-personal-demo">
+	
+	<%= render :partial => "header" %>
+	
+	<section class="banner vertical-align-middle">
+		<h1 class="color-xs-black font-size-xs-30pt font-size-sm-42pt text-center text-uppercase margin-top-sm-400">Talk To The Team</h1>
+		<div class="scroll-container"><a href="#content" class="font-size-xs-42pt"><i class="color-xs-white fa fa-angle-down" aria-hidden="true"></i></a></div>
+	</section>
+	
+	<section class="" id="content">
+		<div class="container">
+			<div class="row">
+				<div class="bg-grey col-md-5 padding-top-xs-60 color-xs-white">
+					<div class="personal_information_form">
+						<div class="">
+							<div class="alert alert-danger font-size-xs-17pt text-center" id="msg" style="display:none"></div>
+							<div class="font-size-xs-17pt margin-bottom-xs-15">Contact us for a free consultation.</div>
+						</div>
+						<div class="content_form">
+							<form id="personal_form" method="post" class="form">
+								<div class="personal_demo_form_row">
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_first_name" name="personal_demo_first_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="First Name*"/>
+										</div>
+									</div>
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_last_name" name="personal_demo_last_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="Last Name*"/>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="personal_demo_form_row">
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_company_name" name="personal_demo_company_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="Company Name"/>
+										</div>
+									</div>
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_business_email" name="personal_demo_business_email" type="text" value="" class="form_field form-control personal_form_text" placeholder="Business Email*"/>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="personal_demo_form_row">
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_phone_number" name="personal_demo_phone_number" type="text" value="" class="form_field form-control personal_form_text" placeholder="Phone Number"/>
+										</div>
+									</div>
+									<div class="personal_form_input">
+										<div class="form-group">
+											<input id="personal_demo_country" name="personal_demo_country" type="text" value="" class="form_field form-control personal_form_text" placeholder="Country"/>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="personal_demo_form_row">
+									<div class="personal_form_input">
+										<div class="form-group">
+											<textarea id="personal_demo_help" name="personal_demo_help" cols="40" rows="10" aria-invalid="false" class="form-control personal_form_text" placeholder="How can we help you?"></textarea>
+										</div>
+										<div class="col-xs-12 horizontal-center bottom-btn">
+											<button type="button" id="submit_button" onclick="" form="personal_form" class="btn btn-lg btn-red font-size-xs-17pt button submit_button">Talk to Us</button>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7 padding-top-xs-120 padding-bottom-xs-120 padding-left-md-60">
+					<div class="font-size-xs-22pt margin-bottom-xs-20 text-uppercase">Want To Start Advertising In China?</div>
+					<div class="font-size-xs-17pt margin-bottom-xs-60">
+						<p>China already is the world’s third-largest advertising market, and it is poised nearly to double, reaching more than $70 billion by 2016.</p>
+						<p>Successfully navigating the world of online advertising in China has been our mission for 8 years. We offer to take your global business ambitions and turn them into results via Adeqo!</p>
+					</div>
+					<div class="font-size-xs-22pt margin-bottom-xs-20 text-uppercase">CORE FEATRURES:</div>
+					<div class="font-size-xs-17pt">
+						<ul class="padding-left-xs-30">
+							<li class="margin-bottom-xs-5"><strong>Real Time China</strong></li>
+							<li class="margin-bottom-xs-5"><strong>ROI Tracking</strong></li>
+							<li class="margin-bottom-xs-5"><strong>Actionable Insights</strong></li>
+							<li class="margin-bottom-xs-5"><strong>Data Visualization</strong></li>
+							<li class="margin-bottom-xs-5"><strong>Cross Channel Attribution</strong></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<%= render :partial => "footer" %>
+	
+</div>
+<!-- Modal-->
+<%= render :partial => "modal" %>
+<!-- /Modal-->
+
+<script type="text/javascript">
+
+$("#submit_button").click(function(e){
+	var postData = $("#personal_form" ).serializeArray();
+	var formURL = "/send_demo_email";
+
+	$( "#msg" ).hide();
+	$( "#msg" ).empty();
+	$("#personal_form :input").prop("disabled", true);
+
+	// console.log(postData);
+
+	for (i = 0; i < postData.length; i++) {
+
+		// console.log(postData[i]["name"]);
+		// console.log(postData[i]["value"]);
+
+		if(postData[i]["name"] == "personal_demo_first_name" || postData[i]["name"] == "personal_demo_last_name" || postData[i]["name"] == "personal_demo_business_email"){
+			if(postData[i]["value"] == ""){
+				$( "#msg" ).append( "<p style='color:red;'>Please fill in the required field.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+				return;
+			}
+		}
+
+		if(postData[i]["name"] == "personal_demo_business_email"){
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(regex.test(postData[i]["value"]) == false){
+				$( "#msg" ).append( "<p style='color:red;'>Please make sure your email is in correct format.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+				return;
+			}
+		}
+
+	}
+
+	$.ajax({
+		url : formURL,
+		type: "POST",
+		data : postData,
+		success:function(data, textStatus, jqXHR)
+		{
+			if(data['status'] == "true"){
+				
+				window.location.href = "/demo_thank_you";
+				
+				$( "#msg" ).append( "<p style='color:green;'>Thanks for your email, we will reply to you shortly!</p>" );
+				$( "#msg" ).show();
+				$( "#personal_form" )[0].reset();
+				$("#personal_form :input").prop("disabled", false);
+
+				$( "#msg" ).delay(2500).slideUp(850);
+			}else{
+				$( "#msg" ).append( "<p style='color:red;'>Something wrong with your data, please make sure you type in the correct format.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+			}
+
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			$( "#msg" ).append( "<p style='color:red;'>Our service is too busy, please try again in a few minutes.</p>" );
+			$( "#msg" ).show();
+			$("#personal_form :input").prop("disabled", false);
+		}
+	});
+
+	e.preventDefault();
+});
+// $("#personal_form").submit();
+</script>

@@ -1,0 +1,283 @@
+<div class="content_title">Account Settings</div>
+<%= render partial: "account_tab_menu.html.erb" %>
+
+<%
+@company_id = @user_company_id
+
+# if @user_company_id.to_i < 4
+	# @company_id = @company_id + 1
+# end
+# @company_id = 2
+%>
+
+<!-- 
+<script type="text/javascript">
+var str_arr = []
+    
+str_arr.push("companyid="+<%=@user_company_id%>);
+str_arr.push("current_page="+document.URL);
+str_arr.push("host="+location.host);
+str_arr.push("referrer="+document.referrer);
+str_arr.push("event_type=ecommerce");
+
+
+
+str_arr.push("order_id=@order_id");
+str_arr.push("revenue=@revenue");
+str_arr.push("catalog=@catalog");
+
+
+
+(function() {
+    function a(a) {
+        return null != a ? a.toString().substring(0, 1024) : ""
+    }
+    
+    var f = document.createElement("script");
+    f.type = "text/javascript";
+    f.async = !0;
+    f.charset = "UTF-8";
+    f.src = "http://t.adeqo.com/event?"+str_arr.join("&");
+    var a = document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(f, a)
+
+})();
+</script> -->
+
+
+<!-- leon 2017-04-26 start -->
+<div class="content_outer">
+    <div class="content_core pull-left right_border">
+      <nav class="nav-tabs">
+		    <div class="content_core_big_title content_item"><a id="pixel_tab" class="tracking_tab bold" href="#pixel" data-toggle="tab">Confirmation Page Pixel Code</a></div>
+		    
+		    
+		    <div class="content_core_big_title content_item"><a id="tracking_tab" class="tracking_tab" href="#tracking" data-toggle="tab">Website Tracking Code</a></div>
+		    
+      </nav>
+    </div>
+    <div class="content_core pull-left left_border">
+      <div class="tab-content">
+        <div id="pixel" class="tab-pane fade in active">
+        	
+        	
+        	  <div class="content_item">
+					<div class="content_core_big_title"><strong>CONFIROMATION PAGE PIXEL CODE</strong></div>
+			        <div class="content_core_title">
+					    This is the Converison Analytics tracking code for this property.
+				    </div>
+			        <div class="content_core_title">
+					    To get all the benefits of Converison Analytics tracking code for this property, edit/copy and paste this code into the conversion confirmation page you want to track.
+					    <br />
+				    </div>			      
+				      
+		      		<textarea spellcheck="false" rows="18" cols="120" readonly="readonly" class="tracking_code_core" id="toBeCopied">
+
+
+<script type="text/javascript">
+
+<!--!!!!!!Use either JS or Image pixel!!!!!!-->
+
+
+var str_arr = []
+
+<!--Do not edit these values-->		    
+str_arr.push("companyid=<%=@user_company_id%>");
+str_arr.push("event_type=confirmation");
+
+
+<!--Replace the name with the value you wanna put in, remove those you don't need-->
+<!-- E.g replace @price with 10-->
+<!--optional-->
+	str_arr.push("order_id=@order_id");
+	str_arr.push("revenue=@revenue");
+	str_arr.push("category=@category");
+	str_arr.push("name=@name");
+	str_arr.push("price=@price");
+	str_arr.push("sku=@sku");
+	str_arr.push("promotecode=@promotecode");
+	str_arr.push("quantity=@quantity");
+<!--optional-->
+
+<!--You can also add as much as custom field here-->
+<!--custom-->
+	str_arr.push("custom_field=@custom_value");
+<!--custom-->
+
+
+(function() {
+    function a(a) {
+        return null != a ? a.toString().substring(0, 1024) : ""
+    }
+    
+    var f = document.createElement("script");
+    f.type = "text/javascript";
+    f.async = !0;
+    f.charset = "UTF-8";
+    f.src = "http://t.adeqo.com/event?"+str_arr.join("&");
+    var a = document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(f, a)
+
+})();
+</script>
+
+<!--Replace the name with the value you wanna put in, remove those you don't need-->
+<!-- E.g replace @price with 10-->
+<img style="display:none;" alt="" src="http://t.adeqo.com/event?companyid=<%=@user_company_id%>&event_type=confirmation&order_id=@order_id&revenue=@revenue&category=@category&name=@name&price=@price&sku=@sku&promotecode=@promotecode&quantity=@quantity&custom_field=@custom_value" width="1" height="1">
+					
+		      			
+		      		</textarea>
+			      
+        	  </div>
+        	
+        	  
+		      
+		      
+			  <div class="tracking_code_button_container">
+				  <div class="button red_button submit_button central_button" onclick="autoSelect('toBeCopied');">Copy Scripts</div>
+			  </div>		      
+
+        </div>
+        
+        
+        
+        <div id="tracking" class="tab-pane fade">
+        
+			<div class="content_item">
+						
+				<div class="content_core_big_title"><strong>Website Tracking</strong></div>
+	        	<div class="content_core_title">
+			    	This is the Universal Analytics tracking code for this property.
+		    	</div>
+	        	<div class="content_core_title">
+					To get all the benefits of Universal Analytics for this property, copy and paste this code into every webpage you want to track.
+		    	</div>
+		    	
+		    	<div class="content_core_title">
+					Copy the code below and paste it between the &lt;head&gt; and &lt;/head&gt; in your website code.
+					<br />
+				</div>		
+						
+						
+		      		<textarea spellcheck="false" rows="18" cols="120" readonly="readonly" class="tracking_code_core" id="toBeCopied">
+		      			
+<script type="text/javascript">
+var str_arr = []
+		    
+str_arr.push("companyid="+<%=@user_company_id%>);
+str_arr.push("current_page="+document.URL);
+str_arr.push("host="+location.host);
+str_arr.push("referrer="+document.referrer);
+
+(function() {
+    function a(a) {
+        return null != a ? a.toString().substring(0, 1024) : ""
+    }
+    
+    var f = document.createElement("script");
+    f.type = "text/javascript";
+    f.async = !0;
+    f.charset = "UTF-8";
+    f.src = "http://t.adeqo.com/event?"+str_arr.join("&");
+    var a = document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(f, a)
+
+})();
+</script>
+<script type="text/javascript" src="http://china.adeqo.com/adeqo_track.js"></script>
+
+
+		      		</textarea>
+			      
+        	  </div>        	
+        	
+        	
+        	
+        	
+	    	
+	    	<div class="tracking_code_button_container">
+				  <div class="button red_button submit_button central_button" onclick="autoSelect('toBeCopied');">Copy Scripts</div>
+			</div>
+        </div>
+        
+        
+        
+        
+      </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#pixel_tab").on('click', function(e){
+    $(this).addClass("bold disabledTab");
+    $("#pixel").tab('show');
+    $("#tracking_tab").removeClass("bold disabledTab");
+  });
+  $("#tracking_tab").on('click', function(e){
+    $(this).addClass("bold disabledTab");
+    $("#tracking").tab('show');
+    $("#pixel_tab").removeClass("bold disabledTab");
+  });
+});
+</script>
+<!-- leon 2017-04-26 end -->
+
+
+
+
+
+
+<!-- old tracking code backup -->
+<!-- <script type="text/javascript">
+		var _dynm = _dynm || [];
+		(function() {
+				function a(a) {
+						return null != a ? a.toString().substring(0, 1024) : ""
+				}
+				var gl = {'tag_version':'ut0.1','companyid': <%=@user_company_id%>};
+				var prm = {};
+				prm.params1 = '';
+				prm.params2 = '';
+				prm.params3 = '';
+				prm.params4 = '';
+				prm.params5 = '';
+				prm.params6 = '';
+				prm.params7 = '';
+				prm.params8 = '';
+				prm.params9 = '';
+				prm.params10 = '';
+
+				gl.prm = prm;
+				_dynm.push(gl);
+				for (var b = [], c = 0; c < _dynm.length; c++){
+						if (_dynm[c].hasOwnProperty("tag_version") && _dynm[c].hasOwnProperty("companyid") && _dynm[c].hasOwnProperty("prm")){
+								b.push("rn=" + (Math.floor((1e8 - 2) * Math.random()) + 1));
+								for (var d in _dynm[c]){
+										if (_dynm[c].hasOwnProperty(d)){
+												if ("object" == typeof _dynm[c][d]){
+														for (var e in _dynm[c][d])
+																_dynm[c][d].hasOwnProperty(e) && b.push("prm." + e + "=" + _dynm[c][d][e]);
+												}else{
+														b.push(d + "=" + _dynm[c][d]);
+												}
+										}
+								}
+								_dynm[c].p = 1;
+								var f = document.createElement("script");
+								f.type = "text/javascript";
+								f.async = !0;
+								f.charset = "UTF-8";
+								f.src = "http://t.adeqo.com/event?" + b.join("&");
+								var a = document.getElementsByTagName("script")[0];
+								a.parentNode.insertBefore(f, a)
+						}
+				}
+
+		})();
+</script>		
+		
+<noscript> 
+	<img style="border-style:none;" alt="" src="http://t.adeqo.com/event?tag_version=ut0.1&companyid=1&prm.params1=&prm.params2=&prm.params3=&prm.params4=&prm.params5=&prm.params6=&prm.params7=&prm.params8=&prm.params9=&prm.params10=" width="1" height="1"> 
+</noscript> -->

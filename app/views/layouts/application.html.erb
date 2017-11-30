@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Adeqo<%=@title%></title>
+		
+		<meta name="title" content="Adeqo: The Leading Edge Real Time Advertising Platform">
+		<meta name="description" content="Adeqo is the world’s leading edge platform to connect to China's Media Channels in Real Time. Adeqo supports Baidu, Qihoo360, Sogou, Shenma.">
+		<meta name="keywords" content="chinese search engine,baidu advertising,qihoo360,sogou, advertising,Digital Marking Agency, ppc agency, seo agency, digital advertising agency , web design agency">
+		
+		<!-- <link href='http://fonts.useso.com/css?family=Average+Sans' rel='stylesheet' type='text/css'> -->
+		<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+		
+		<%= stylesheet_link_tag    'css/bootstrap.min.css' %>
+		<%= stylesheet_link_tag    'css/font-awesome.min.css' %>
+		<%= stylesheet_link_tag    'css/main.css'%>
+		<%= stylesheet_link_tag    'css/landing.css'%>
+		
+		<%= stylesheet_link_tag    'css/single_landing.css'%>
+		<%= stylesheet_link_tag    'css/animate.css-master/animate.min.css'%>
+		<%= stylesheet_link_tag    'js/Swiper-3.4.1/dist/css/swiper.min.css'%>
+		
+		
+		<%= javascript_include_tag 'js/jquery.min.js'%>
+		
+		<% stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<% javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+		
+		
+		
+		<script type="application/ld+json">
+
+			{ 
+				"@context" : "http://schema.org",
+			
+				"@type" : "Organization",
+				
+				"legalName" : "Adeqo",
+				
+				"url" : "http://www.adeqo.com/",
+				
+				"logo" : "https://www.adeqo.com/images/adeqo-logo.png",
+				
+				"sameAs" : ["http://www.bmgww.com/"],
+				
+				"contactPoint" : [{
+									"@type" : "ContactPoint",
+									"telephone" : "+852-2492-2770",
+									"contactType" : "Customer Service" 
+								 }]
+			}
+		</script>
+		
+		<script type="application/ld+json">	
+			{	
+				"@context" : "http://schema.org",	
+				"@type" : "WebSite",	
+				"name" : "Adeqo",	
+				"url" : "http://www.adeqo.com/"	
+			}	
+		</script>
+		
+		 
+		<!-- <script type="text/javascript" src="/remarketing_interface.js "></script>
+		<script type="text/javascript">
+			var params = {'orderID': '2623739137' };//订单号
+			window.remarketing.adeqo.saveOrderId(params);
+		</script> -->
+		
+	</head>
+	<body data-spy="scroll" data-target=".navbar" data-offset="160">
+		<%= yield %>
+		
+		<!-- <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script> -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<% javascript_include_tag 'js/bootstrap.min.js'%>
+		<%= javascript_include_tag 'js/application.js'%>
+		<%= javascript_include_tag 'js/landing.js'%>
+		
+		<!-- <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/application.js"></script> -->
+	</body>
+</html>
+
